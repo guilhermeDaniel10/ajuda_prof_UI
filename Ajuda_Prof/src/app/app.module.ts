@@ -5,13 +5,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
 
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ApiHttpService } from './services/api-http.service';
 import { ApiEndpointsService } from './services/api-endpoints.service';
 import { TurmaComponent } from './private/turma/turma.component';
 import { Constants } from './config/constants';
 import { AdicionarTurmaComponent } from './private/turma/adicionar-turma/adicionar-turma.component';
 import { PrivateComponent } from './private/private/private.component';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalAdicionarTurmaComponent } from './private/turma/modal-adicionar-turma/modal-adicionar-turma.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -19,18 +23,23 @@ import { PrivateComponent } from './private/private/private.component';
     HeaderComponent,
     TurmaComponent,
     AdicionarTurmaComponent,
-    PrivateComponent
+    PrivateComponent,
+    ModalAdicionarTurmaComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule
 
   ],
   providers: [
     ApiEndpointsService,
     ApiHttpService,
-    Constants
+    Constants,
+    NgbActiveModal
   ],
   bootstrap: [AppComponent]
 })

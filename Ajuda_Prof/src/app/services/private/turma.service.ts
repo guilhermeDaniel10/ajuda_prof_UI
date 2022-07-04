@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Turma } from 'src/app/private/turma/turma.model';
 import { QueryStringParameters } from 'src/app/shared/classes/query-string-parameters';
 import { ApiEndpointsService } from '../api-endpoints.service';
 import { ApiHttpService } from '../api-http.service';
@@ -23,8 +24,15 @@ export class TurmaService {
     );
   }
 
-  getAllTurmas(){
+  getAllTurmas() {
     return this.apiHttpService.get(this.apiEndpointsService.createUrl('turma/all'));
+  }
+
+  adicionarTurma(turma: Turma) {
+    return this.apiHttpService.post(
+      this.apiEndpointsService.createUrl('turma/add'),
+      { escola: turma.escola, ano: turma.ano, sigla: turma.sigla }
+    )
   }
 
 
