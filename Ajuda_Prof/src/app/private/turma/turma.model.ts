@@ -1,10 +1,10 @@
 export class Turma {
-    escola: string;
+    usernameProfessor: string;
     ano: number;
     sigla: string;
 
-    constructor(escola: string, ano: number, sigla: string) {
-        this.escola = escola;
+    constructor(usernameProfessor: string, ano: number, sigla: string) {
+        this.usernameProfessor = usernameProfessor;
         this.ano = ano;
         this.sigla = sigla;
     }

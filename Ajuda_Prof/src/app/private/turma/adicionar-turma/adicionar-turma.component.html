@@ -4,14 +4,6 @@
             <form class="needs-validation" [formGroup]="adicionarTurmaForm" novalidate>
                 <div class="row g-4">
                     <div class="col-7">
-                        <label for="escola" class="form-label">Escola</label>
-                        <input type="text" class="form-control" id="escola" placeholder="" value=""
-                            formControlName="escola" required>
-                        <div class="invalid-feedback">
-                            Escola inválida
-                        </div>
-                    </div>
-                    <div class="col-7">
                         <label for="ano" class="form-label">Ano</label>
                         <select class="form-select" id="ano" (change)="changeAno($event)" required>
                             <option *ngFor="let ano of anos_validos" [value]="ano">

@@ -14,7 +14,6 @@ export class AdicionarTurmaComponent implements OnInit {
   turma: Turma;
 
   adicionarTurmaForm = this.formBuilder.group({
-    escola: '',
     ano: '',
     sigla: ''
   })
@@ -46,14 +45,11 @@ export class AdicionarTurmaComponent implements OnInit {
   }
 
   setTurmaModel() {
-    this.turma = new Turma(this.escola?.value, this.ano?.value, this.sigla?.value);
+    this.turma = new Turma("teste1", this.ano?.value, this.sigla?.value);
   }
 
   get ano() {
     return this.adicionarTurmaForm.get('ano');
-  }
-  get escola() {
-    return this.adicionarTurmaForm.get('escola');
   }
   get sigla() {
     return this.adicionarTurmaForm.get('sigla');

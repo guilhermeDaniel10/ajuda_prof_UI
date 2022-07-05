@@ -31,7 +31,8 @@ export class TurmaService {
   adicionarTurma(turma: Turma) {
     return this.apiHttpService.post(
       this.apiEndpointsService.createUrl('turma/add'),
-      { escola: turma.escola, ano: turma.ano, sigla: turma.sigla }
+      // TODO: ALTERAR AQUI O USERNAME
+      { usernameProfessor: turma.usernameProfessor, ano: turma.ano, sigla: turma.sigla }
     )
   }
 
