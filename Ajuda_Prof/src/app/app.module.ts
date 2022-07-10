@@ -15,6 +15,11 @@ import { PrivateComponent } from './private/private/private.component';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalAdicionarTurmaComponent } from './private/turma/modal-adicionar-turma/modal-adicionar-turma.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TabelaAlunosComponent } from './private/aluno/tabela-alunos/tabela-alunos.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
@@ -24,7 +29,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TurmaComponent,
     AdicionarTurmaComponent,
     PrivateComponent,
-    ModalAdicionarTurmaComponent
+    ModalAdicionarTurmaComponent,
+    TabelaAlunosComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +38,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatPaginatorModule,
+    MatTableModule
+    
 
   ],
   providers: [

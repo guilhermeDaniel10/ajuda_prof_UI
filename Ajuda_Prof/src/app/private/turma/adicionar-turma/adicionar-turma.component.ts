@@ -39,13 +39,8 @@ export class AdicionarTurmaComponent implements OnInit {
   }
 
   onSubmit() {
-    this.setTurmaModel();
-    console.log(this.turma);
-    this.turmaService.adicionarTurma(this.turma).subscribe((data) => console.log(data));
-  }
 
-  setTurmaModel() {
-    this.turma = new Turma("teste1", this.ano?.value, this.sigla?.value);
+    this.turmaService.adicionarTurma("teste1", this.ano?.value, this.sigla?.value).subscribe((data) => console.log(data));
   }
 
   get ano() {

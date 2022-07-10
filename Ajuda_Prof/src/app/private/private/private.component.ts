@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ModalDismissReasons, NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { AlunoService } from "src/app/services/private/aluno.service";
 import { ModalAdicionarTurmaComponent } from "../turma/modal-adicionar-turma/modal-adicionar-turma.component";
 
 @Component({
@@ -14,9 +15,10 @@ export class PrivateComponent implements OnInit {
   
   closeResult: string;
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal, private alunoService: AlunoService) { }
 
   ngOnInit(): void {
+
   }
 
   open() {

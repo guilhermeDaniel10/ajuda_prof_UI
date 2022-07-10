@@ -28,11 +28,11 @@ export class TurmaService {
     return this.apiHttpService.get(this.apiEndpointsService.createUrl('turma/all'));
   }
 
-  adicionarTurma(turma: Turma) {
+  adicionarTurma(username: string, ano: number, sigla: string) {
     return this.apiHttpService.post(
       this.apiEndpointsService.createUrl('turma/add'),
       // TODO: ALTERAR AQUI O USERNAME
-      { usernameProfessor: turma.usernameProfessor, ano: turma.ano, sigla: turma.sigla }
+      { usernameProfessor: username, ano: ano, sigla: sigla }
     )
   }
 
