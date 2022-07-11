@@ -20,6 +20,8 @@ import { TabelaAlunosComponent } from './private/aluno/tabela-alunos/tabela-alun
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { TabelaComponent } from './shared/tabela/tabela.component';
 
 
 @NgModule({
@@ -30,7 +32,8 @@ import { MatTableModule } from '@angular/material/table';
     AdicionarTurmaComponent,
     PrivateComponent,
     ModalAdicionarTurmaComponent,
-    TabelaAlunosComponent
+    TabelaAlunosComponent,
+    TabelaComponent
   ],
   imports: [
     BrowserModule,
@@ -42,8 +45,8 @@ import { MatTableModule } from '@angular/material/table';
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatPaginatorModule,
-    MatTableModule
-    
+    MatTableModule,
+    MatSortModule
 
   ],
   providers: [
