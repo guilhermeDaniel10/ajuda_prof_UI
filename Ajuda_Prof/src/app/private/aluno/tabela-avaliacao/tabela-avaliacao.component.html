@@ -1,0 +1,61 @@
+<div class="mat-elevation-z8 d-flex justify-content-center">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.position }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name" >
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field floatLabel="never" appearance="outline">
+          <input
+            matInput
+            placeholder="Name"
+            [value]="element.name"
+            [(ngModel)]="element.name"
+          />
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="symbol">
+      <mat-header-cell *matHeaderCellDef>
+        Symbol
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element" >
+        <mat-form-field floatLabel="never" appearance="outline">
+          <input
+            matInput
+            placeholder="Symbol"
+            [value]="element.symbol"
+            [(ngModel)]="element.symbol"
+          />
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Fav Column -->
+    <ng-container matColumnDef="fav">
+      <mat-header-cell *matHeaderCellDef >
+        Favorite
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element" >
+        <mat-form-field floatLabel="never" appearance="outline">
+          <mat-select [(value)]="element.fav" placeholder="Favorite">
+            <mat-option>None</mat-option>
+            <mat-option value="Yes">Yes</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </table>
+</div>

@@ -17,6 +17,7 @@ export class PrivateComponent implements OnInit {
   closeResult: string;
   alunos: Aluno[] = [];
   dados: TabelaAlunos[];
+  dadosTabela: Tabela;
 
   constructor(
     private modalService: NgbModal,
@@ -24,28 +25,7 @@ export class PrivateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.alunoService
-      .getAlunosDaTurmaByProfessor('teste1', 10, 'M')
-      .subscribe((data: Aluno[]) => {
-        this.alunos = data;
-        //this.dataSource = new MatTableDataSource(this.alunos);
-        this.fillDadosInput();
-      });
-  }
 
-  fillDadosInput() {
-    this.dados = [];
-    let i = 1;
-    this.alunos.forEach((value) => {
-      this.dados.push({
-        position: i,
-        primeiroNome: value.primeiroNome,
-        ultimoNome: value.ultimoNome,
-        email: value.email,
-        numeroAluno: value.numeroAluno,
-      });
-      i++;
-    });
   }
 
   open() {

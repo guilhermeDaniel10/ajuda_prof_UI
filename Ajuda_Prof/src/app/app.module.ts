@@ -22,7 +22,11 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { TabelaComponent } from './shared/tabela/tabela.component';
-
+import { TabelaAvaliacaoComponent } from './private/aluno/tabela-avaliacao/tabela-avaliacao.component';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -33,7 +37,8 @@ import { TabelaComponent } from './shared/tabela/tabela.component';
     PrivateComponent,
     ModalAdicionarTurmaComponent,
     TabelaAlunosComponent,
-    TabelaComponent
+    TabelaComponent,
+    TabelaAvaliacaoComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,15 +51,13 @@ import { TabelaComponent } from './shared/tabela/tabela.component';
     MatFormFieldModule,
     MatPaginatorModule,
     MatTableModule,
-    MatSortModule
-
+    MatSortModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatIconModule,
+    MatInputModule,
   ],
-  providers: [
-    ApiEndpointsService,
-    ApiHttpService,
-    Constants,
-    NgbActiveModal
-  ],
-  bootstrap: [AppComponent]
+  providers: [ApiEndpointsService, ApiHttpService, Constants, NgbActiveModal],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

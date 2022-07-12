@@ -1,0 +1,24 @@
+table {
+    width: 40%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width: 25%;
+  }
+
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+
+  .mat-form-field-outline-start, .mat-form-field-outline-end {
+    border-radius: 0 !important;
+}
+
+mat-header-cell, mat-cell {
+    justify-content: center;
+  }
