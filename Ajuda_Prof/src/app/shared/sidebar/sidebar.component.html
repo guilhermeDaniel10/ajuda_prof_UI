@@ -1,0 +1,50 @@
+<mat-toolbar>
+    <mat-toolbar-row>
+        <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+            <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+            <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+        </button>
+        <span class="title-nav">Ajuda-Prof</span>
+        <div class="right-children">
+            <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+                <mat-icon>share</mat-icon>
+            </button>
+            <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+                <mat-icon>account_circle</mat-icon>
+            </button>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+        <button mat-button class="menu-button" routerLink="/home">
+            <mat-icon>home</mat-icon>
+            <span>Página inicial</span>
+        </button>
+        <button mat-button class="menu-button" routerLink="/turmas">
+            <mat-icon>class</mat-icon>
+            <span>Turmas</span>
+        </button>
+        <button mat-button class="menu-button" routerLink="/avaliacao">
+            <mat-icon>assessment</mat-icon>
+            <span>Testes</span>
+        </button>
+        <button mat-button class="menu-button" routerLink="/about">
+            <mat-icon>info</mat-icon>
+            <span>Sobre</span>
+        </button>
+
+        <mat-divider></mat-divider>
+
+        <button mat-button class="menu-button" routerLink="/help">
+            <mat-icon>help</mat-icon>
+            <span>Ajuda</span>
+        </button>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="content">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

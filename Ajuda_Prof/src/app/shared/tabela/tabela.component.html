@@ -1,15 +1,7 @@
 <div class="mat-elevation-z8 d-flex justify-content-center">
-  <table
-    mat-table
-    [dataSource]="dataSource"
-    matSort
-    (matSortChange)="announceSortChange($event)"
-    class="mat-elevation-z2"
-  >
-    <ng-container
-      [matColumnDef]="column"
-      *ngFor="let column of columns; let i = index"
-    >
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
+    class="mat-elevation-z2">
+    <ng-container [matColumnDef]="column" *ngFor="let column of columns; let i = index">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
         {{ dados.header[i] }}
       </th>
@@ -22,7 +14,5 @@
     <tr mat-row *matRowDef="let row; columns: columns"></tr>
   </table>
 </div>
-<mat-paginator [hidden]="paginacaoBol === false"
-  [pageSizeOptions]="[5, 10, 25, totalPaginacao]"
-  aria-label="Select page of users"
-></mat-paginator>
+<mat-paginator [hidden]="paginacaoBol === false" [pageSizeOptions]="[5, 10, 25, totalPaginacao]"
+  aria-label="Select page of users"></mat-paginator>

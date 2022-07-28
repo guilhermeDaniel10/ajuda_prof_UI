@@ -1,24 +1,48 @@
 table {
-    width: 40%;
-  }
-  
-  .mat-form-field {
-    font-size: 14px;
-    width: 100%;
-  }
-  
-  td, th {
-    width: 25%;
-  }
-
-  th.mat-sort-header-sorted {
-    color: black;
-  }
-
-  .mat-form-field-outline-start, .mat-form-field-outline-end {
-    border-radius: 0 !important;
+  width: 85%;
 }
 
-mat-header-cell, mat-cell {
-    justify-content: center;
-  }
+td,
+th {
+  width: 0%;
+  font-size: 0.77rem;
+  text-align: center;
+  vertical-align: middle;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.mat-form-field-outline-start,
+.mat-form-field-outline-end {
+  border-radius: 0 !important;
+}
+th.mat-header-cell {
+  background-color: #60a3d9 !important;
+  color: #fcfcfc;
+  text-align: center !important;
+}
+
+mat-header-cell,
+mat-cell {
+  justify-content: center;
+}
+
+.form-control {
+  font-size: 0.65rem;
+  background-color: #fcfcfc !important;
+}
+
+input {
+  text-align: center;
+}
+
+.center-block {
+  margin: auto;
+  display: block;
+}
+
+.nomes_alunos {
+  font-size: 0.65rem;
+}

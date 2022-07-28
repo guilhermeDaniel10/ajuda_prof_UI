@@ -1,8 +1,15 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { Teste } from '../../turma/teste/teste.model';
+import { TESTE } from '../../turma/teste/teste.mock';
+import { Resposta } from '../../turma/teste/resposta/resposta.model';
+import { RESPOSTA } from '../../turma/teste/resposta/resposta.mock';
+import { Tabela } from 'src/app/shared/tabela/tabela.model';
+import { TabelaAvaliacao } from './tabela-avaliacao.model';
+import { Pergunta } from '../../turma/teste/pergunta/pergunta.model';
 
 
 @Component({
@@ -10,49 +17,67 @@ import { MatSnackBar } from "@angular/material/snack-bar";
   templateUrl: './tabela-avaliacao.component.html',
   styleUrls: ['./tabela-avaliacao.component.scss']
 })
-export class TabelaAvaliacaoComponent {
-  displayedColumns = ['position', 'name', 'symbol', 'fav'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+export class TabelaAvaliacaoComponent implements OnInit {
 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
+  testeMock: Teste = TESTE[0];
+  perguntas: Pergunta[] = [];
+  respostaMock: Resposta[] = RESPOSTA;
+  tooltips: string[] = [];
+
+  dataSource = new MatTableDataSource();
+  generateTable = false;
+  columns: string[];
+  tableInfo: { column: number; header: string | number }[];
+  data: any[];
+  dados: any;
+
+
+  ngOnInit(): void {
+    this.initTable();
+    this.initTooltips();
+    
+    this.generateTable = true;
+  }
+
+  inputChange(event: any): void {
+    console.log(event);
+  }
+
+  initTable() {
+    this.tableInfo = [];
+    this.dados = [];
+
+
+    this.respostaMock.map((value) => {
+      const nome = value.primeiroNome + " " + value.ultimoNome;
+      const respostasCotacao = value.cotacaoResposta;
+      let tempDados: TabelaAvaliacao[] = [];
+
+
+      tempDados.push({ info: nome });
+      respostasCotacao.map((value) => {
+        tempDados.push({ info: value.cotacaoResposta });
+      })
+      console.log(tempDados);
+      this.dados.push(tempDados);
+    })
+    console.log(this.dados);
+
+
+
+    const cotacaoRespostas = this.respostaMock.map(value => value.cotacaoResposta);
+    console.log(cotacaoRespostas);
+    this.data = this.dados;
+    this.tableInfo.push({ column: 0, header: "Nome" });
+    this.testeMock.perguntas.map((value) => { this.tableInfo.push({ column: value.iteracao, header: value.pergunta }) });
+    this.columns = this.tableInfo.map(value => String(value.column));
+    console.log(this.tableInfo);
+
+  };
+
+  initTooltips(){
+    this.perguntas = this.testeMock.perguntas;
+    this.tooltips.push('Nome do aluno');
+    this.perguntas.map(value => this.tooltips.push("Pergunta vale " + value.cotacao + " valores."))
   }
 }
-
-export interface Element {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-  fav: string;
-}
-
-const ELEMENT_DATA: Element[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H', fav: "Yes" },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He', fav: "" },
-  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li', fav: "" },
-  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be', fav: "" },
-  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B', fav: "Yes" },
-  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C', fav: "" },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N', fav: "" },
-  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O', fav: "" },
-  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F', fav: "" },
-  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne', fav: "" },
-  { position: 11, name: 'Sodium', weight: 22.9897, symbol: 'Na', fav: "" },
-  { position: 12, name: 'Magnesium', weight: 24.305, symbol: 'Mg', fav: "" },
-  { position: 13, name: 'Aluminum', weight: 26.9815, symbol: 'Al', fav: "" },
-  { position: 14, name: 'Silicon', weight: 28.0855, symbol: 'Si', fav: "" },
-  { position: 15, name: 'Phosphorus', weight: 30.9738, symbol: 'P', fav: "" },
-  { position: 16, name: 'Sulfur', weight: 32.065, symbol: 'S', fav: "" },
-  { position: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl', fav: "" },
-  { position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar', fav: "" },
-  { position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K', fav: "" },
-  { position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca', fav: "" },
-];
-
-
-/**  Copyright 2018 Google Inc. All Rights Reserved.
-    Use of this source code is governed by an MIT-style license that
-    can be found in the LICENSE file at http://angular.io/license */

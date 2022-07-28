@@ -27,6 +27,12 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule} from '@angular/material/toolbar';
+import { MatSidenavModule} from '@angular/material/sidenav';
+import { MatDividerModule } from '@angular/material/divider';
+
 
 @NgModule({
   declarations: [
@@ -39,6 +45,7 @@ import { MatInputModule } from '@angular/material/input';
     TabelaAlunosComponent,
     TabelaComponent,
     TabelaAvaliacaoComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +63,12 @@ import { MatInputModule } from '@angular/material/input';
     MatSelectModule,
     MatIconModule,
     MatInputModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule
   ],
   providers: [ApiEndpointsService, ApiHttpService, Constants, NgbActiveModal],
   bootstrap: [AppComponent],

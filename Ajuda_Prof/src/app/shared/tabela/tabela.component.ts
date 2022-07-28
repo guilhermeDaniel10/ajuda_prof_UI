@@ -32,6 +32,7 @@ export class TabelaComponent implements OnInit, AfterViewInit {
   constructor(private _liveAnnouncer: LiveAnnouncer) {}
 
   ngOnInit() {
+    console.log(this.dados.content);
     this.fillCells();
     this.iniatePaginatorAndSort();
   }
