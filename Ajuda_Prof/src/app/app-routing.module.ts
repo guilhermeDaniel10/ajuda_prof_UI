@@ -1,11 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TabelaAvaliacaoComponent } from './private/aluno/tabela-avaliacao/tabela-avaliacao.component';
+import { AvaliacaoComponent } from './private/avaliacao/avaliacao.component';
+import { TabelaAvaliacaoComponent } from './private/avaliacao/tabela-avaliacao/tabela-avaliacao.component';
+import { TabelaParaExcelComponent } from './private/avaliacao/tabela-avaliacao/tabela-para-excel/tabela-para-excel.component';
 
 const routes: Routes = [
   {
     path: 'avaliacao',
-    component: TabelaAvaliacaoComponent
+    component: AvaliacaoComponent,
+    children: [
+      {
+        path: 'tabela-avaliacao',
+        component: TabelaAvaliacaoComponent,
+        children: [
+          {
+            path: 'tabela-excel',
+            component: TabelaParaExcelComponent
+          }
+        ]
+      }
+    ]
   }
 ];
 

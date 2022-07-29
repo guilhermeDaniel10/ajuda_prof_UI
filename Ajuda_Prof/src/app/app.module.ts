@@ -22,7 +22,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { TabelaComponent } from './shared/tabela/tabela.component';
-import { TabelaAvaliacaoComponent } from './private/aluno/tabela-avaliacao/tabela-avaliacao.component';
+import { TabelaAvaliacaoComponent } from './private/avaliacao/tabela-avaliacao/tabela-avaliacao.component';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
@@ -32,6 +32,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import { MatSidenavModule} from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
+import { AvaliacaoComponent } from './private/avaliacao/avaliacao.component';
+import { TabelaParaExcelComponent } from './private/avaliacao/tabela-avaliacao/tabela-para-excel/tabela-para-excel.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -46,6 +49,8 @@ import { MatDividerModule } from '@angular/material/divider';
     TabelaComponent,
     TabelaAvaliacaoComponent,
     SidebarComponent,
+    AvaliacaoComponent,
+    TabelaParaExcelComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,7 +73,8 @@ import { MatDividerModule } from '@angular/material/divider';
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    MatTooltipModule
   ],
   providers: [ApiEndpointsService, ApiHttpService, Constants, NgbActiveModal],
   bootstrap: [AppComponent],

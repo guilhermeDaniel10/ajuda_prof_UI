@@ -10,6 +10,8 @@ import { RESPOSTA } from '../../turma/teste/resposta/resposta.mock';
 import { Tabela } from 'src/app/shared/tabela/tabela.model';
 import { TabelaAvaliacao } from './tabela-avaliacao.model';
 import { Pergunta } from '../../turma/teste/pergunta/pergunta.model';
+import { Turma } from '../../turma/turma.model';
+import { TooltipPosition } from '@angular/material/tooltip';
 
 
 @Component({
@@ -23,6 +25,10 @@ export class TabelaAvaliacaoComponent implements OnInit {
   perguntas: Pergunta[] = [];
   respostaMock: Resposta[] = RESPOSTA;
   tooltips: string[] = [];
+  turma: Turma;
+  nomeTabela: string = "MaterialTable";
+  exportTable: any[] = [];
+  newData: any[] = [];
 
   dataSource = new MatTableDataSource();
   generateTable = false;
@@ -35,28 +41,33 @@ export class TabelaAvaliacaoComponent implements OnInit {
   ngOnInit(): void {
     this.initTable();
     this.initTooltips();
-    
+
     this.generateTable = true;
   }
 
-  inputChange(event: any): void {
-    console.log(event);
+  inputChange(event: any, column: string, aluno: any): void {
+    const eventData = event.target?.value;
+    const iteration = aluno[0].iteration;
+    this.newData[iteration][column].info = eventData;
+    console.log(this.newData);
+  
   }
 
   initTable() {
+    this.turma = this.testeMock.turma;
     this.tableInfo = [];
     this.dados = [];
 
 
-    this.respostaMock.map((value) => {
+    this.respostaMock.map((value, i) => {
       const nome = value.primeiroNome + " " + value.ultimoNome;
       const respostasCotacao = value.cotacaoResposta;
       let tempDados: TabelaAvaliacao[] = [];
 
 
-      tempDados.push({ info: nome });
+      tempDados.push({ iteration: i, info: nome });
       respostasCotacao.map((value) => {
-        tempDados.push({ info: value.cotacaoResposta });
+        tempDados.push({ iteration: i, info: value.cotacaoResposta });
       })
       console.log(tempDados);
       this.dados.push(tempDados);
@@ -68,6 +79,7 @@ export class TabelaAvaliacaoComponent implements OnInit {
     const cotacaoRespostas = this.respostaMock.map(value => value.cotacaoResposta);
     console.log(cotacaoRespostas);
     this.data = this.dados;
+    this.newData = this.data;
     this.tableInfo.push({ column: 0, header: "Nome" });
     this.testeMock.perguntas.map((value) => { this.tableInfo.push({ column: value.iteracao, header: value.pergunta }) });
     this.columns = this.tableInfo.map(value => String(value.column));
@@ -75,7 +87,7 @@ export class TabelaAvaliacaoComponent implements OnInit {
 
   };
 
-  initTooltips(){
+  initTooltips() {
     this.perguntas = this.testeMock.perguntas;
     this.tooltips.push('Nome do aluno');
     this.perguntas.map(value => this.tooltips.push("Pergunta vale " + value.cotacao + " valores."))
