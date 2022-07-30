@@ -35,6 +35,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { AvaliacaoComponent } from './private/avaliacao/avaliacao.component';
 import { TabelaParaExcelComponent } from './private/avaliacao/tabela-avaliacao/tabela-para-excel/tabela-para-excel.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { FooterComponent } from './shared/footer/footer.component';
+import { MatCardModule } from '@angular/material/card';
+import { ModalComponent } from './shared/modal/modal.component';
 
 
 @NgModule({
@@ -51,6 +54,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     SidebarComponent,
     AvaliacaoComponent,
     TabelaParaExcelComponent,
+    FooterComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,7 +79,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatCardModule
+    
   ],
   providers: [ApiEndpointsService, ApiHttpService, Constants, NgbActiveModal],
   bootstrap: [AppComponent],

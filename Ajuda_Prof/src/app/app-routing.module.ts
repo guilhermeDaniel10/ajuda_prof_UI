@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AvaliacaoComponent } from './private/avaliacao/avaliacao.component';
 import { TabelaAvaliacaoComponent } from './private/avaliacao/tabela-avaliacao/tabela-avaliacao.component';
 import { TabelaParaExcelComponent } from './private/avaliacao/tabela-avaliacao/tabela-para-excel/tabela-para-excel.component';
+import { TurmaComponent } from './private/turma/turma.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
         ]
       }
     ]
+  },
+  {
+    path: 'turma',
+    component: TurmaComponent
   }
 ];
 

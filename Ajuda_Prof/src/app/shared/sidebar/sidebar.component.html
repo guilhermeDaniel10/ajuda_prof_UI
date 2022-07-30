@@ -4,7 +4,10 @@
             <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
             <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
         </button>
-        <span class="title-nav">Ajuda-Prof</span>
+        <a class="navbar-brand" href="#">
+            <img src="assets/professor_white.png" width="82" height="82" alt="">
+        </a>
+        <!--<span class="title-nav">Ajuda-Prof</span>-->
         <div class="right-children">
             <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
                 <mat-icon>share</mat-icon>
@@ -22,7 +25,7 @@
             <mat-icon>home</mat-icon>
             <span>Página inicial</span>
         </button>
-        <button mat-button class="menu-button" routerLink="/turmas">
+        <button mat-button class="menu-button" routerLink="/turma">
             <mat-icon>class</mat-icon>
             <span>Turmas</span>
         </button>

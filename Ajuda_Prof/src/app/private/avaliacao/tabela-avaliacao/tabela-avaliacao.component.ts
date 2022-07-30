@@ -12,6 +12,7 @@ import { TabelaAvaliacao } from './tabela-avaliacao.model';
 import { Pergunta } from '../../turma/teste/pergunta/pergunta.model';
 import { Turma } from '../../turma/turma.model';
 import { TooltipPosition } from '@angular/material/tooltip';
+import { ExcelGeneratorService } from './tabela-para-excel/excel-generator.service';
 
 
 @Component({
@@ -27,7 +28,6 @@ export class TabelaAvaliacaoComponent implements OnInit {
   tooltips: string[] = [];
   turma: Turma;
   nomeTabela: string = "MaterialTable";
-  exportTable: any[] = [];
   newData: any[] = [];
 
   dataSource = new MatTableDataSource();
@@ -36,6 +36,9 @@ export class TabelaAvaliacaoComponent implements OnInit {
   tableInfo: { column: number; header: string | number }[];
   data: any[];
   dados: any;
+
+  constructor(private tabelaExcelService: ExcelGeneratorService) { }
+
 
 
   ngOnInit(): void {
@@ -50,7 +53,7 @@ export class TabelaAvaliacaoComponent implements OnInit {
     const iteration = aluno[0].iteration;
     this.newData[iteration][column].info = eventData;
     console.log(this.newData);
-  
+
   }
 
   initTable() {
@@ -91,5 +94,10 @@ export class TabelaAvaliacaoComponent implements OnInit {
     this.perguntas = this.testeMock.perguntas;
     this.tooltips.push('Nome do aluno');
     this.perguntas.map(value => this.tooltips.push("Pergunta vale " + value.cotacao + " valores."))
+  }
+
+  exportTable() {
+    console.log()
+    this.tabelaExcelService.exportTableToExcel(this.nomeTabela);
   }
 }

@@ -1,0 +1,39 @@
+.page-container {
+  width: 100%;
+}
+
+.chains {
+  width: 100%;
+  display: block;
+}
+
+.chains mat-card {
+  display: inline-block;
+}
+
+mat-card {
+  width: 20%;
+  height: 20%;
+  margin: 30px;
+}
+
+.fab_icon {
+  position: fixed;
+  bottom: 1%;
+  margin-bottom: 0.7rem;
+  margin-right: 0rem;
+}
+.mat-icon {
+  color: #fff;
+}
+
+.mat-turma {
+  background-color: #60a3d9;
+  color: #fff;
+}
+
+.fac_class {
+    width: 2.4rem;
+  position: relative;
+  float: right;
+}

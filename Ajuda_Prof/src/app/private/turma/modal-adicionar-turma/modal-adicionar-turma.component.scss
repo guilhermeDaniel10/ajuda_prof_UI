@@ -1,0 +1,28 @@
+.modal-header {
+    background-color: #0074B7;
+    height: 3rem;
+    
+}
+
+.modal-title {
+    color: white;
+    margin-top: 1.3rem;
+}
+
+.button_close {
+    
+    border: none;
+    background: none;
+    color: white;
+}
+
+.mat-icon-close {
+    color: white;
+}
+
+.modal-body {
+    width: 100%;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    display: inline-block
+}

@@ -1,9 +1,9 @@
-   
-
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Adicionar Turma</h4>
-    <button type="button" class="btn btn-outline-danger" (click)="activeModal.dismiss('Cross click')">X</button>
-  </div>
-  <div class="modal-body">
-    <app-adicionar-turma></app-adicionar-turma>
-  </div>
+<div class="modal-header">
+  <h3 class="modal-title">Adicionar Turma</h3>
+  <button type="button" class="button_close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div class="modal-body">
+  <app-adicionar-turma></app-adicionar-turma>
+</div>

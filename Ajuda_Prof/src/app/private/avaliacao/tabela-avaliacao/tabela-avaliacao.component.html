@@ -3,7 +3,7 @@
   <button class="save_button" matTooltip="Guardar">
     <mat-icon class="mat_icon">save</mat-icon>
   </button>
-  <button class="save_button pl-2" matTooltip="Exportar para pdf">
+  <button class="save_button pl-2" matTooltip="Exportar para pdf" (click)="exportTable()">
     <mat-icon class="mat_icon">save_alt</mat-icon>
   </button>
 </div>
@@ -34,4 +34,4 @@
     <tr mat-row *matRowDef="let row; columns: columns;"></tr>
   </table>
 </div>
-<app-tabela-para-excel [nomeTabela]='nomeTabela' [arrayTable]="data"></app-tabela-para-excel>
+<!--<app-tabela-para-excel [nomeTabela]='nomeTabela' [arrayTable]="data"></app-tabela-para-excel>-->
