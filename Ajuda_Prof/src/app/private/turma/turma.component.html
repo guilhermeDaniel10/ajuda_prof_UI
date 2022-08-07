@@ -1,44 +1,15 @@
-<mat-toolbar color="primary">
-    <span>Card view demo</span>
-    <button mat-button (click)="toggleGridColumns()" fxHide.lt-md>
-      <span *ngIf="gridColumns === 4">Three Columns</span>
-      <span *ngIf="gridColumns === 3">Four Columns</span>
-    </button>
-  </mat-toolbar>
-  <div class="content">
-    <div fxLayout="row wrap" fxLayoutGap="16px grid">
-      <div [fxFlex]="(100/gridColumns) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let num of [1,2,3,4,5,6,7]">
-        <mat-card class="mat-elevation-z4">
-          <mat-card-header>
-            <mat-card-title>Mountains {{num}}</mat-card-title>
-          </mat-card-header>
-          <img mat-card-image src="./../assets/images/mountains.jpg">
-          <mat-card-content>
-            <p>
-              The Himalayas is a mountain range in Asia.
-            </p>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-button>LIKE</button>
-            <button mat-button>SHARE</button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
-    </div>
-  </div>
-
-<!--
 <div class="page-container">
     <div class="chains">
-        <ng-container >
-            <div class="all-mat" fxLayout="row wrap" fxLayoutGap="16px grid">
-                <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let turma of turmas; let i = index">
-                <mat-card type="button" class="example-card" (click)="turmaSelecionada()" routerLink="selecionada">
+        <div class="cards">
+            <ng-container *ngFor="let turma of turmas; let i = index">
+
+                <!--(click)="turmaSelecionada()" routerLink="selecionada"-->
+                <mat-card type="button" class="example-card">
                     <mat-card-header>
                         <mat-card-title>{{turma.ano}}º{{turma.sigla}}</mat-card-title>
                         <mat-card-subtitle>{{turma.professor.escola}}</mat-card-subtitle>
                     </mat-card-header>
-                    <img mat-card-image src="assets/logo_esag.png" alt="Logo escola">
+                    <img mat-card-image src="assets/logo_isep.png" alt="Logo escola">
                     <mat-card-content>
                         <p>
                             Um texto qualquer informativo, possivelmente com o número de alunos e de testes ao longo de
@@ -47,22 +18,28 @@
                     </mat-card-content>
                     <mat-card-actions>
                         <button mat-button>Avaliações</button>
-                        <button mat-button>Mais...</button>
+                        <button mat-button [matMenuTriggerFor]="menu">Mais</button>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item (click)="goToPage('turmas/alunos', turma)">Alunos</button>
+                            <button mat-menu-item>Estatísticas</button>
+                        </mat-menu>
                     </mat-card-actions>
                 </mat-card>
-            </div>
-    </div>
-    </ng-container>
 
-</div>
+            </ng-container>
+
+        </div>
+
+    </div>
 </div>
 <div class="fac_class">
     <div class="fab_icon">
-        <a mat-mini-fab color="turma" routerLink="." matTooltip="Adicionar turma" [matTooltipPosition]="'left'"
+        <!--(click)="tShowAdu()"-->
+        <a mat-mini-fab color="turma" routerLink="." matTooltip="Adicionar Turma" [matTooltipPosition]="'left'"
             (click)="adicionarTurma()">
             <mat-icon>add</mat-icon>
         </a>
     </div>
 </div>
 
--->
+<router-outlet></router-outlet>

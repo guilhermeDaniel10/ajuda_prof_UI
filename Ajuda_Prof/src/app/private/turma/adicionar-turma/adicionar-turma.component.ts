@@ -41,7 +41,7 @@ export class AdicionarTurmaComponent implements OnInit {
 
   onSubmit() {
 
-    this.turmaService.adicionarTurma("teste1", this.ano?.value, this.sigla?.value).subscribe((data) => console.log(data));
+    this.turmaService.adicionarTurma("teste1", Number(this.ano?.value), String(this.sigla?.value)).subscribe((data) => console.log(data));
   }
 
   get ano() {

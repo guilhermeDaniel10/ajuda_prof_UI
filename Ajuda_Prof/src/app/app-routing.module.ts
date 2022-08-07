@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AlunosComponent } from './private/aluno/alunos/alunos.component';
 import { AvaliacaoComponent } from './private/avaliacao/avaliacao.component';
 import { TabelaAvaliacaoComponent } from './private/avaliacao/tabela-avaliacao/tabela-avaliacao.component';
 import { TabelaParaExcelComponent } from './private/avaliacao/tabela-avaliacao/tabela-para-excel/tabela-para-excel.component';
@@ -31,7 +32,12 @@ const routes: Routes = [
       component: TurmaSelecionadaComponent
     }
     ]
+  },
+  {
+    path: 'turmas/alunos',
+    component: AlunosComponent
   }
+
 ];
 
 @NgModule({

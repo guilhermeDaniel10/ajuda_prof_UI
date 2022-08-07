@@ -57,4 +57,9 @@ export class TurmaComponent implements OnInit {
     }
   }
 
+  goToPage(pageName:string, turma: Turma){
+    console.log(turma);
+    this.route.navigate([`${pageName}`], { queryParams: { professor: turma.professor.idProfessor, turma:turma.idTurma} });
+  }
+
 }

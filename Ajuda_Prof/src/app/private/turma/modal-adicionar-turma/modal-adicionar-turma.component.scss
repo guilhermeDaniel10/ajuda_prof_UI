@@ -1,28 +1,26 @@
 .modal-header {
-    background-color: #0074B7;
-    height: 3rem;
-    
+  //background-color: #0074B7;
+  height: 3rem;
 }
 
 .modal-title {
-    color: white;
-    margin-top: 1.3rem;
+  color: #6c757d;
+  margin-top: 1.3rem;
 }
 
 .button_close {
-    
-    border: none;
-    background: none;
-    color: white;
+  border: none;
+  background: none;
+  color: #6c757d;
 }
 
 .mat-icon-close {
-    color: white;
+  color: #6c757d;
 }
 
 .modal-body {
-    width: 100%;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    display: inline-block
+  width: 100%;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  display: inline-block;
 }

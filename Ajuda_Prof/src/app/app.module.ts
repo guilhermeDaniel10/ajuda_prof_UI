@@ -29,9 +29,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { MatButtonModule } from '@angular/material/button';
-import { MatToolbarModule} from '@angular/material/toolbar';
-import { MatSidenavModule} from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatMenuModule } from '@angular/material/menu';
 import { AvaliacaoComponent } from './private/avaliacao/avaliacao.component';
 import { TabelaParaExcelComponent } from './private/avaliacao/tabela-avaliacao/tabela-para-excel/tabela-para-excel.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -39,6 +40,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { MatCardModule } from '@angular/material/card';
 import { ModalComponent } from './shared/modal/modal.component';
 import { TurmaSelecionadaComponent } from './private/turma/turma-selecionada/turma-selecionada.component';
+import { AlunosComponent } from './private/aluno/alunos/alunos.component';
 
 
 @NgModule({
@@ -58,6 +60,7 @@ import { TurmaSelecionadaComponent } from './private/turma/turma-selecionada/tur
     FooterComponent,
     ModalComponent,
     TurmaSelecionadaComponent,
+    AlunosComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,10 +85,11 @@ import { TurmaSelecionadaComponent } from './private/turma/turma-selecionada/tur
     MatIconModule,
     MatDividerModule,
     MatTooltipModule,
-    MatCardModule
-    
+    MatCardModule,
+    MatMenuModule
+
   ],
   providers: [ApiEndpointsService, ApiHttpService, Constants, NgbActiveModal],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
