@@ -5,15 +5,14 @@ import { delay, filter } from 'rxjs/operators';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { MatSidenav } from '@angular/material/sidenav';
 
-
-
+//TODO: Eliminar isto começar a desaparecer a barra lateral
+//@UntilDestroy()
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit, AfterViewInit {
-
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
 
@@ -23,24 +22,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.observer
-      .observe(['(max-width: 800px)'])
-      .pipe(delay(1), untilDestroyed(this))
-      .subscribe((res) => {
-        if (res.matches) {
-          this.sidenav.mode = 'over';
-          this.sidenav.close();
-        } else {
-          this.sidenav.mode = 'side';
-          this.sidenav.open();
-        }
-      });
-
     this.router.events
-      .pipe(
-        untilDestroyed(this),
-        filter((e) => e instanceof NavigationEnd)
-      )
       .subscribe(() => {
         if (this.sidenav.mode === 'over') {
           this.sidenav.close();

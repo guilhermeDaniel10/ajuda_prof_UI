@@ -61,4 +61,8 @@ export class AlunosComponent implements OnInit, AfterViewInit {
     console.log(element);
   }
 
+  eliminarAluno(element: Aluno) {
+    console.log(element);
+  }
+
 }

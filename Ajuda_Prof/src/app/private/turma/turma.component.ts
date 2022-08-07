@@ -20,15 +20,6 @@ export class TurmaComponent implements OnInit {
   closeResult: string;
 
 
-  title = 'Card View Demo';
-
-  gridColumns = 3;
-
-  toggleGridColumns() {
-    this.gridColumns = this.gridColumns === 3 ? 4 : 3;
-  }
-
-
   ngOnInit() {
     console.log(this.turmas);
   }

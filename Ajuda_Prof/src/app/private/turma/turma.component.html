@@ -4,7 +4,7 @@
             <ng-container *ngFor="let turma of turmas; let i = index">
 
                 <!--(click)="turmaSelecionada()" routerLink="selecionada"-->
-                <mat-card type="button" class="example-card">
+                <mat-card type="button" class="example-card" (click)="goToPage('turmas/alunos', turma)">
                     <mat-card-header>
                         <mat-card-title>{{turma.ano}}º{{turma.sigla}}</mat-card-title>
                         <mat-card-subtitle>{{turma.professor.escola}}</mat-card-subtitle>
