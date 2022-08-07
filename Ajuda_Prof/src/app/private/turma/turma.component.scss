@@ -1,4 +1,4 @@
-.page-container {
+/*.page-container {
   width: 100%;
 }
 
@@ -32,8 +32,19 @@ mat-card {
   color: #fff;
 }
 
+
+*/
+
 .fac_class {
-    width: 2.4rem;
+    width: rem;
   position: relative;
   float: right;
+}
+
+.content {
+    padding: 16px;
+}
+
+.content > mat-card {
+    width: 200px;
 }

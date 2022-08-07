@@ -38,6 +38,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { FooterComponent } from './shared/footer/footer.component';
 import { MatCardModule } from '@angular/material/card';
 import { ModalComponent } from './shared/modal/modal.component';
+import { TurmaSelecionadaComponent } from './private/turma/turma-selecionada/turma-selecionada.component';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { ModalComponent } from './shared/modal/modal.component';
     TabelaParaExcelComponent,
     FooterComponent,
     ModalComponent,
+    TurmaSelecionadaComponent,
   ],
   imports: [
     BrowserModule,

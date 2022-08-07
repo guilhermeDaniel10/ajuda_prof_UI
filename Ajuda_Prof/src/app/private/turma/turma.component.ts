@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TurmaService } from 'src/app/services/private/turma.service';
 import { ModalAdicionarTurmaComponent } from './modal-adicionar-turma/modal-adicionar-turma.component';
@@ -12,11 +13,20 @@ import { Turma } from './turma.model';
 })
 export class TurmaComponent implements OnInit {
 
-  constructor(private turmaService: TurmaService, private modalService: NgbModal) { }
+  constructor(private turmaService: TurmaService, private modalService: NgbModal, private route: Router, private activatedRoute: ActivatedRoute) { }
 
   longText: string = "testeteste";
   turmas: Turma[] = TURMA;
   closeResult: string;
+
+
+  title = 'Card View Demo';
+
+  gridColumns = 3;
+
+  toggleGridColumns() {
+    this.gridColumns = this.gridColumns === 3 ? 4 : 3;
+  }
 
 
   ngOnInit() {
@@ -30,6 +40,11 @@ export class TurmaComponent implements OnInit {
   adicionarTurma() {
     const modalRef = this.modalService.open(ModalAdicionarTurmaComponent);
     modalRef.componentInstance.name = 'World';
+  }
+
+  turmaSelecionada(){
+  this.route.navigate(['./selecionada']);
+    console.log("Turma selecionada");
   }
 
   private getDismissReason(reason: any): string {
