@@ -4,18 +4,21 @@
             <ng-container *ngFor="let turma of turmas; let i = index">
 
                 <!--(click)="turmaSelecionada()" routerLink="selecionada"-->
-                <mat-card type="button" class="example-card" (click)="goToPage('turmas/alunos', turma)">
-                    <mat-card-header>
-                        <mat-card-title>{{turma.ano}}º{{turma.sigla}}</mat-card-title>
-                        <mat-card-subtitle>{{turma.professor.escola}}</mat-card-subtitle>
-                    </mat-card-header>
-                    <img mat-card-image src="assets/logo_isep.png" alt="Logo escola">
-                    <mat-card-content>
-                        <p>
-                            Um texto qualquer informativo, possivelmente com o número de alunos e de testes ao longo de
-                            um ano
-                        </p>
-                    </mat-card-content>
+                <mat-card type="button" class="example-card">
+                    <div type="button" (click)="goToPage('turmas/alunos', turma)">
+                        <mat-card-header>
+                            <mat-card-title>{{turma.ano}}º{{turma.sigla}}</mat-card-title>
+                            <mat-card-subtitle>{{turma.professor.escola}}</mat-card-subtitle>
+                        </mat-card-header>
+                        <img mat-card-image src="assets/logo_isep.png" alt="Logo escola">
+                        <mat-card-content>
+                            <p>
+                                Um texto qualquer informativo, possivelmente com o número de alunos e de testes ao longo
+                                de
+                                um ano
+                            </p>
+                        </mat-card-content>
+                    </div>
                     <mat-card-actions>
                         <button mat-button>Avaliações</button>
                         <button mat-button [matMenuTriggerFor]="menu">Mais</button>

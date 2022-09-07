@@ -13,6 +13,7 @@ import { Pergunta } from '../../turma/teste/pergunta/pergunta.model';
 import { Turma } from '../../turma/turma.model';
 import { TooltipPosition } from '@angular/material/tooltip';
 import { ExcelGeneratorService } from './tabela-para-excel/excel-generator.service';
+import { CotacaoResposta } from '../../turma/teste/resposta/cotacao-resposta/cotacao-resposta.model';
 
 
 @Component({
@@ -50,10 +51,22 @@ export class TabelaAvaliacaoComponent implements OnInit {
 
   inputChange(event: any, column: string, aluno: any): void {
     const eventData = event.target?.value;
+
+    this.processChanges(eventData, column, aluno);
+
+    console.log(aluno);
+
+  }
+
+
+  processChanges(eventData: any, column: string, aluno: any) {
     const iteration = aluno[0].iteration;
     this.newData[iteration][column].info = eventData;
-    console.log(this.newData);
+  }
 
+
+  sumCotacoes(arrCotacoes: CotacaoResposta[]) {
+    return arrCotacoes.reduce((a, b) => a + b.cotacaoResposta, 0);
   }
 
   initTable() {
@@ -71,7 +84,10 @@ export class TabelaAvaliacaoComponent implements OnInit {
       tempDados.push({ iteration: i, info: nome });
       respostasCotacao.map((value) => {
         tempDados.push({ iteration: i, info: value.cotacaoResposta });
-      })
+      });
+      let total = this.sumCotacoes(respostasCotacao);
+      tempDados.push({ iteration: i, info: total });
+      console.log(total);
       console.log(tempDados);
       this.dados.push(tempDados);
     })
@@ -85,7 +101,10 @@ export class TabelaAvaliacaoComponent implements OnInit {
     this.newData = this.data;
     this.tableInfo.push({ column: 0, header: "Nome" });
     this.testeMock.perguntas.map((value) => { this.tableInfo.push({ column: value.iteracao, header: value.pergunta }) });
+    this.tableInfo.push({ column: this.tableInfo.length, header: "Total" });
+
     this.columns = this.tableInfo.map(value => String(value.column));
+
     console.log(this.tableInfo);
 
   };
