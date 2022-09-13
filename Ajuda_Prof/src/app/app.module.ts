@@ -41,6 +41,7 @@ import { MatCardModule } from '@angular/material/card';
 import { ModalComponent } from './shared/modal/modal.component';
 import { TurmaSelecionadaComponent } from './private/turma/turma-selecionada/turma-selecionada.component';
 import { AlunosComponent } from './private/aluno/alunos/alunos.component';
+import { PaginaInicialComponent } from './private/pagina-inicial/pagina-inicial.component';
 
 
 @NgModule({
@@ -61,6 +62,7 @@ import { AlunosComponent } from './private/aluno/alunos/alunos.component';
     ModalComponent,
     TurmaSelecionadaComponent,
     AlunosComponent,
+    PaginaInicialComponent,
   ],
   imports: [
     BrowserModule,

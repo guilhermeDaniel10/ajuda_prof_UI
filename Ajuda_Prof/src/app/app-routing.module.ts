@@ -4,10 +4,20 @@ import { AlunosComponent } from './private/aluno/alunos/alunos.component';
 import { AvaliacaoComponent } from './private/avaliacao/avaliacao.component';
 import { TabelaAvaliacaoComponent } from './private/avaliacao/tabela-avaliacao/tabela-avaliacao.component';
 import { TabelaParaExcelComponent } from './private/avaliacao/tabela-avaliacao/tabela-para-excel/tabela-para-excel.component';
+import { PaginaInicialComponent } from './private/pagina-inicial/pagina-inicial.component';
 import { TurmaSelecionadaComponent } from './private/turma/turma-selecionada/turma-selecionada.component';
 import { TurmaComponent } from './private/turma/turma.component';
 
 const routes: Routes = [
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'pagina-inicial',
+  },
+  {
+    path: 'pagina-inicial',
+    component: PaginaInicialComponent,
+  },
   {
     path: 'avaliacao',
     component: AvaliacaoComponent,
@@ -18,30 +28,30 @@ const routes: Routes = [
         children: [
           {
             path: 'tabela-excel',
-            component: TabelaParaExcelComponent
-          }
-        ]
-      }
-    ]
+            component: TabelaParaExcelComponent,
+          },
+        ],
+      },
+    ],
   },
   {
     path: 'turmas',
     component: TurmaComponent,
-    children: [{
-      path: 'selecionada',
-      component: TurmaSelecionadaComponent
-    }
-    ]
+    children: [
+      {
+        path: 'selecionada',
+        component: TurmaSelecionadaComponent,
+      },
+    ],
   },
   {
     path: 'turmas/alunos',
-    component: AlunosComponent
-  }
-
+    component: AlunosComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
