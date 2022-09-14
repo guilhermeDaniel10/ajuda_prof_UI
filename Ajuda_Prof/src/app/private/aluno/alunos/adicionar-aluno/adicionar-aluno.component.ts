@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Turma } from 'src/app/private/turma/turma.model';
+import { AlunoService } from 'src/app/services/private/aluno.service';
 import { TurmaService } from 'src/app/services/private/turma.service';
+import { Aluno } from '../../aluno.model';
 
 @Component({
   selector: 'app-adicionar-aluno',
@@ -9,28 +11,52 @@ import { TurmaService } from 'src/app/services/private/turma.service';
   styleUrls: ['./adicionar-aluno.component.scss'],
 })
 export class AdicionarAlunoComponent implements OnInit {
+  
+  tituloModal: string = 'Adicionar Aluno';
+  alunoExistente: Aluno | null;
   anos_validos: number[] = [];
   turma: Turma;
 
-  adicionarTurmaForm = this.formBuilder.group({
-    ano: '',
-    sigla: '',
+  adicionarAlunoForm = this.formBuilder.group({
+    numero_aluno: '',
+    primeiro_nome_aluno: '',
+    ultimo_nome_aluno: '',
+    email_aluno: '',
   });
 
   constructor(
     private turmaService: TurmaService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private alunoService: AlunoService
   ) {}
 
   ngOnInit(): void {
-    console.log('here');
-    this.iniciar_anos();
+
+    this.alunoExistente = this.alunoService.getAlunoEditavelAtual();
+    if (this.alunoExistente) {
+      this.setInputWithValues(this.alunoExistente);
+    } else {
+      this.setEmptyInput();
+    }
+    this.alunoService.setAlunoEditavelAtual(null);
   }
 
-  iniciar_anos() {
-    for (let i = 1; i <= 12; i++) {
-      this.anos_validos.push(i);
-    }
+  setInputWithValues(aluno: Aluno) {
+    this.adicionarAlunoForm = this.formBuilder.group({
+      numero_aluno: aluno.numeroAluno.toString(),
+      primeiro_nome_aluno: aluno.primeiroNome,
+      ultimo_nome_aluno: aluno.ultimoNome,
+      email_aluno: aluno.email,
+    });
+  }
+
+  setEmptyInput() {
+    this.adicionarAlunoForm = this.formBuilder.group({
+      numero_aluno: '',
+      primeiro_nome_aluno: '',
+      ultimo_nome_aluno: '',
+      email_aluno: '',
+    });
   }
 
   changeAno(e: any) {
@@ -50,9 +76,9 @@ export class AdicionarAlunoComponent implements OnInit {
   }
 
   get numeroAluno() {
-    return this.adicionarTurmaForm.get('numero-aluno');
+    return this.adicionarAlunoForm.get('numero-aluno');
   }
   get sigla() {
-    return this.adicionarTurmaForm.get('sigla');
+    return this.adicionarAlunoForm.get('sigla');
   }
 }

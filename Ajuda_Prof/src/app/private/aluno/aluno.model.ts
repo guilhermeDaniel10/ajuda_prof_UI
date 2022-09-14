@@ -5,7 +5,7 @@ export class Aluno {
     primeiroNome: string;
     ultimoNome: string;
     email: string;
-    turma: Turma;
+    turma: Turma | undefined;
     numeroAluno: number;
 
 

@@ -1,28 +1,43 @@
-import { Component, NgZone, OnInit } from '@angular/core';
-import { ModalDismissReasons, NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, Input, NgZone, OnInit } from '@angular/core';
+import {
+  ModalDismissReasons,
+  NgbActiveModal,
+  NgbModal,
+} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-modal-adicionar-aluno',
   templateUrl: './modal-adicionar-aluno.component.html',
-  styleUrls: ['./modal-adicionar-aluno.component.scss']
+  styleUrls: ['./modal-adicionar-aluno.component.scss'],
 })
 export class ModalAdicionarAlunoComponent implements OnInit {
-
+  @Input() isAdding: boolean = true;
   closeResult = '';
+  tituloModal: string = 'Adicionar Aluno';
 
-  constructor(private modalService: NgbModal, public activeModal: NgbActiveModal, private ngZone: NgZone) {}
+  constructor(
+    private modalService: NgbModal,
+    public activeModal: NgbActiveModal,
+    private ngZone: NgZone
+  ) {}
+
   ngOnInit(): void {
-  
+    if (!this.isAdding) {
+      this.tituloModal = 'Editar Aluno';
+    }
   }
 
-  
-
   open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
   }
 
   private getDismissReason(reason: any): string {

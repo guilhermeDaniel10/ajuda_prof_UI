@@ -23,7 +23,6 @@ export class AdicionarTurmaComponent implements OnInit {
     private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    console.log("here");
     this.iniciar_anos();
   }
 

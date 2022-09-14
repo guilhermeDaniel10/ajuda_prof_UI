@@ -3,58 +3,62 @@
     <div class="align-left col-md-7 col-lg-9">
       <form
         class="needs-validation"
-        [formGroup]="adicionarTurmaForm"
+        [formGroup]="adicionarAlunoForm"
         novalidate
       >
         <div class="row g-4">
           <div class="col-7">
-            <label for="sigla" class="form-label">Número do Aluno</label>
+            <label for="numero_aluno" class="form-label">Número do Aluno</label>
             <input
               type="text"
               class="form-control"
-              id="numero-aluno"
+              id="numero_aluno"
               placeholder=""
               value=""
-              formControlName="numero-aluno"
+              formControlName="numero_aluno"
               required
             />
             <div class="invalid-feedback">Número inválido.</div>
           </div>
           <div class="col-7">
-            <label for="sigla" class="form-label">Primeiro Nome</label>
+            <label for="primeiro_nome_aluno" class="form-label"
+              >Primeiro Nome</label
+            >
             <input
               type="text"
               class="form-control"
-              id="primeiro-nome-aluno"
+              id="primeiro_nome_aluno"
               placeholder=""
               value=""
-              formControlName="primeiro-nome-aluno"
+              formControlName="primeiro_nome_aluno"
               required
             />
             <div class="invalid-feedback">Primeiro Nome inválido.</div>
           </div>
           <div class="col-7">
-            <label for="sigla" class="form-label">Último Nome</label>
+            <label for="ultimo_nome_aluno" class="form-label"
+              >Último Nome</label
+            >
             <input
               type="text"
               class="form-control"
-              id="ultimo-nome-aluno"
+              id="ultimo_nome_aluno"
               placeholder=""
               value=""
-              formControlName="ultimo-nome-aluno"
+              formControlName="ultimo_nome_aluno"
               required
             />
             <div class="invalid-feedback">Último Nome inválido.</div>
           </div>
           <div class="col-7">
-            <label for="sigla" class="form-label">Email</label>
+            <label for="email_aluno" class="form-label">Email</label>
             <input
               type="text"
               class="form-control"
-              id="email-aluno"
+              id="email_aluno"
               placeholder=""
               value=""
-              formControlName="email-aluno"
+              formControlName="email_aluno"
               required
             />
             <div class="invalid-feedback">Email inválido.</div>

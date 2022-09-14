@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { MatTableDataSource } from '@angular/material/table';
@@ -8,6 +14,8 @@ import { Aluno } from '../aluno.model';
 import { MockAlunos } from '../mock-alunos';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalAdicionarAlunoComponent } from './modal-adicionar-aluno/modal-adicionar-aluno.component';
+import { AlunoService } from 'src/app/services/private/aluno.service';
+import { first, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-alunos',
@@ -30,11 +38,13 @@ export class AlunosComponent implements OnInit, AfterViewInit {
   idProfessor: number;
   idTurma: number;
   alunos: Aluno[];
+  alunoEditavelAtual: Aluno;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private alunoService: AlunoService
   ) {
     this.route.queryParams.subscribe((params) => {
       this.idProfessor = params['professor'];
@@ -69,7 +79,11 @@ export class AlunosComponent implements OnInit, AfterViewInit {
   }
 
   editarAluno(element: Aluno) {
-    console.log(element);
+    this.alunoService.setAlunoEditavelAtual(element);
+    const modalRef = this.modalService.open(ModalAdicionarAlunoComponent);
+    modalRef.componentInstance.isAdding = false;
+
+    
   }
 
   eliminarAluno(element: Aluno) {

@@ -45,7 +45,6 @@ import { PaginaInicialComponent } from './private/pagina-inicial/pagina-inicial.
 import { AdicionarAlunoComponent } from './private/aluno/alunos/adicionar-aluno/adicionar-aluno.component';
 import { ModalAdicionarAlunoComponent } from './private/aluno/alunos/modal-adicionar-aluno/modal-adicionar-aluno.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,7 +65,7 @@ import { ModalAdicionarAlunoComponent } from './private/aluno/alunos/modal-adici
     AlunosComponent,
     PaginaInicialComponent,
     AdicionarAlunoComponent,
-    ModalAdicionarAlunoComponent
+    ModalAdicionarAlunoComponent,
   ],
   imports: [
     BrowserModule,
@@ -92,10 +91,9 @@ import { ModalAdicionarAlunoComponent } from './private/aluno/alunos/modal-adici
     MatDividerModule,
     MatTooltipModule,
     MatCardModule,
-    MatMenuModule
-
+    MatMenuModule,
   ],
   providers: [ApiEndpointsService, ApiHttpService, Constants, NgbActiveModal],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
