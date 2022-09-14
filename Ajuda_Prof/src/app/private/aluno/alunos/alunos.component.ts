@@ -6,14 +6,22 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Aluno } from '../aluno.model';
 import { MockAlunos } from '../mock-alunos';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalAdicionarAlunoComponent } from './modal-adicionar-aluno/modal-adicionar-aluno.component';
 
 @Component({
   selector: 'app-alunos',
   templateUrl: './alunos.component.html',
-  styleUrls: ['./alunos.component.scss']
+  styleUrls: ['./alunos.component.scss'],
 })
 export class AlunosComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['idAluno', 'primeiroNome', 'ultimoNome', 'email', 'actions'];
+  displayedColumns: string[] = [
+    'idAluno',
+    'primeiroNome',
+    'ultimoNome',
+    'email',
+    'actions',
+  ];
   dataSource = new MatTableDataSource<Aluno>([]);
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
@@ -23,9 +31,12 @@ export class AlunosComponent implements OnInit, AfterViewInit {
   idTurma: number;
   alunos: Aluno[];
 
-  constructor(private route: ActivatedRoute,
-    private router: Router) {
-    this.route.queryParams.subscribe(params => {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private modalService: NgbModal
+  ) {
+    this.route.queryParams.subscribe((params) => {
       this.idProfessor = params['professor'];
       this.idTurma = params['turma'];
     });
@@ -65,4 +76,8 @@ export class AlunosComponent implements OnInit, AfterViewInit {
     console.log(element);
   }
 
+  adicionarAluno() {
+    const modalRef = this.modalService.open(ModalAdicionarAlunoComponent);
+    modalRef.componentInstance.name = 'World';
+  }
 }

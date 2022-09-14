@@ -42,6 +42,8 @@ import { ModalComponent } from './shared/modal/modal.component';
 import { TurmaSelecionadaComponent } from './private/turma/turma-selecionada/turma-selecionada.component';
 import { AlunosComponent } from './private/aluno/alunos/alunos.component';
 import { PaginaInicialComponent } from './private/pagina-inicial/pagina-inicial.component';
+import { AdicionarAlunoComponent } from './private/aluno/alunos/adicionar-aluno/adicionar-aluno.component';
+import { ModalAdicionarAlunoComponent } from './private/aluno/alunos/modal-adicionar-aluno/modal-adicionar-aluno.component';
 
 
 @NgModule({
@@ -63,6 +65,8 @@ import { PaginaInicialComponent } from './private/pagina-inicial/pagina-inicial.
     TurmaSelecionadaComponent,
     AlunosComponent,
     PaginaInicialComponent,
+    AdicionarAlunoComponent,
+    ModalAdicionarAlunoComponent
   ],
   imports: [
     BrowserModule,

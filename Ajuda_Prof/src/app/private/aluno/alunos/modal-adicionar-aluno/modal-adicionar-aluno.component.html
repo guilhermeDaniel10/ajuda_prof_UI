@@ -1,0 +1,20 @@
+<div class="modal-header">
+  <h2 class="modal-title">Adicionar Aluno</h2>
+  <button
+    type="button"
+    class="button_close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div class="modal-body">
+  <app-adicionar-aluno></app-adicionar-aluno>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary btn-sm">
+    Adicionar
+  </button>
+</div>

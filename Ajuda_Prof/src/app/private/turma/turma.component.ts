@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TurmaService } from 'src/app/services/private/turma.service';
@@ -9,23 +9,28 @@ import { Turma } from './turma.model';
 @Component({
   selector: 'app-turma',
   templateUrl: './turma.component.html',
-  styleUrls: ['./turma.component.scss']
+  styleUrls: ['./turma.component.scss'],
 })
 export class TurmaComponent implements OnInit {
-
-  constructor(private turmaService: TurmaService, private modalService: NgbModal, private route: Router, private activatedRoute: ActivatedRoute) { }
-
-  longText: string = "testeteste";
+  @Input() isAddVisible: boolean = true;
+  longText: string = 'testeteste';
   turmas: Turma[] = TURMA;
   closeResult: string;
 
+  constructor(
+    private turmaService: TurmaService,
+    private modalService: NgbModal,
+    private route: Router
+  ) {}
 
   ngOnInit() {
     console.log(this.turmas);
   }
 
   getTurmasTeste() {
-    this.turmaService.getAllTurmas().subscribe((data) => { console.log(data) });
+    this.turmaService.getAllTurmas().subscribe((data) => {
+      console.log(data);
+    });
   }
 
   adicionarTurma() {
@@ -33,9 +38,9 @@ export class TurmaComponent implements OnInit {
     modalRef.componentInstance.name = 'World';
   }
 
-  turmaSelecionada(){
-  this.route.navigate(['./selecionada']);
-    console.log("Turma selecionada");
+  turmaSelecionada() {
+    this.route.navigate(['./selecionada']);
+    console.log('Turma selecionada');
   }
 
   private getDismissReason(reason: any): string {
@@ -48,9 +53,13 @@ export class TurmaComponent implements OnInit {
     }
   }
 
-  goToPage(pageName:string, turma: Turma){
+  goToPage(pageName: string, turma: Turma) {
     console.log(turma);
-    this.route.navigate([`${pageName}`], { queryParams: { professor: turma.professor.idProfessor, turma:turma.idTurma} });
+    this.route.navigate([`${pageName}`], {
+      queryParams: {
+        professor: turma.professor.idProfessor,
+        turma: turma.idTurma,
+      },
+    });
   }
-
 }

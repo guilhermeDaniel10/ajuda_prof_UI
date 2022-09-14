@@ -35,7 +35,7 @@
 
     </div>
 </div>
-<div class="fac_class">
+<div *ngIf="isAddVisible" class="fac_class">
     <div class="fab_icon">
         <!--(click)="tShowAdu()"-->
         <a mat-mini-fab color="turma" routerLink="." matTooltip="Adicionar Turma" [matTooltipPosition]="'left'"

@@ -1,58 +1,81 @@
 <div class="container">
-    <mat-form-field appearance="standard">
+  <div>
+    <div>
+      <mat-form-field appearance="standard">
         <mat-label>Filtro</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Guilherme" #input>
-    </mat-form-field>
+        <input
+          matInput
+          (keyup)="applyFilter($event)"
+          placeholder="Ex. Guilherme"
+          #input
+        />
+      </mat-form-field>
+    </div>
+    <div>
+      <button mat-raised-button class="add-student" (click)="adicionarAluno()">
+        <mat-icon class="add-std">add</mat-icon>
+        <span class="texto-btn">Adicionar Aluno</span>
+        </button>
+    </div>
+  </div>
 
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+    <!-- Id Column -->
+    <ng-container matColumnDef="idAluno">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Número Aluno</th>
+      <td mat-cell *matCellDef="let element">{{ element.idAluno }}</td>
+    </ng-container>
 
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
-        <!-- Id Column -->
-        <ng-container matColumnDef="idAluno">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Número Aluno </th>
-            <td mat-cell *matCellDef="let element"> {{element.idAluno}} </td>
-        </ng-container>
+    <!-- Primeiro Nome Column -->
+    <ng-container matColumnDef="primeiroNome">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Primeiro Nome</th>
+      <td mat-cell *matCellDef="let element">{{ element.primeiroNome }}</td>
+    </ng-container>
 
-        <!-- Primeiro Nome Column -->
-        <ng-container matColumnDef="primeiroNome">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Primeiro Nome </th>
-            <td mat-cell *matCellDef="let element"> {{element.primeiroNome}} </td>
-        </ng-container>
+    <!-- Ultimo Nome Column -->
+    <ng-container matColumnDef="ultimoNome">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Último Nome</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.ultimoNome | slice: 0:30 }}
+      </td>
+    </ng-container>
 
-        <!-- Ultimo Nome Column -->
-        <ng-container matColumnDef="ultimoNome">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Último Nome </th>
-            <td mat-cell *matCellDef="let element"> {{element.ultimoNome | slice: 0:30}} </td>
-        </ng-container>
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.email | slice: 0:50 }}
+      </td>
+    </ng-container>
 
-        <!-- Email Column -->
-        <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-            <td mat-cell *matCellDef="let element"> {{element.email | slice: 0:50}} </td>
-        </ng-container>
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <div class="acoes">
+        <th class="titulo_acoes" mat-header-cell *matHeaderCellDef>Ações</th>
+      </div>
+      <td mat-cell *matCellDef="let element">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+          "
+        >
+          <button mat-flat-button (click)="editarAluno(element)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-flat-button (click)="eliminarAluno(element)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
 
-
-
-
-        <!-- Actions Column -->
-        <ng-container matColumnDef="actions">
-            <div class="acoes">
-                <th class="titulo_acoes" mat-header-cell *matHeaderCellDef> Ações </th>
-            </div>
-            <td mat-cell *matCellDef="let element">
-                <div style="display: flex;align-items: center;justify-content: flex-start;">
-                    <button mat-flat-button (click)="editarAluno(element)">
-                        <mat-icon>edit</mat-icon>
-                    </button>
-                    <button mat-flat-button (click)="eliminarAluno(element)">
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                </div>
-            </td>
-
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns, sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-    <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <mat-paginator
+    [pageSizeOptions]="[10, 25, 50, 100]"
+    showFirstLastButtons
+  ></mat-paginator>
 </div>

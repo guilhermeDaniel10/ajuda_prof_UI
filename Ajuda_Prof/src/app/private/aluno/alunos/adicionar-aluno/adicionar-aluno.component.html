@@ -1,0 +1,66 @@
+<div class="main">
+  <div class="container">
+    <div class="align-left col-md-7 col-lg-9">
+      <form
+        class="needs-validation"
+        [formGroup]="adicionarTurmaForm"
+        novalidate
+      >
+        <div class="row g-4">
+          <div class="col-7">
+            <label for="sigla" class="form-label">Número do Aluno</label>
+            <input
+              type="text"
+              class="form-control"
+              id="numero-aluno"
+              placeholder=""
+              value=""
+              formControlName="numero-aluno"
+              required
+            />
+            <div class="invalid-feedback">Número inválido.</div>
+          </div>
+          <div class="col-7">
+            <label for="sigla" class="form-label">Primeiro Nome</label>
+            <input
+              type="text"
+              class="form-control"
+              id="primeiro-nome-aluno"
+              placeholder=""
+              value=""
+              formControlName="primeiro-nome-aluno"
+              required
+            />
+            <div class="invalid-feedback">Primeiro Nome inválido.</div>
+          </div>
+          <div class="col-7">
+            <label for="sigla" class="form-label">Último Nome</label>
+            <input
+              type="text"
+              class="form-control"
+              id="ultimo-nome-aluno"
+              placeholder=""
+              value=""
+              formControlName="ultimo-nome-aluno"
+              required
+            />
+            <div class="invalid-feedback">Último Nome inválido.</div>
+          </div>
+          <div class="col-7">
+            <label for="sigla" class="form-label">Email</label>
+            <input
+              type="text"
+              class="form-control"
+              id="email-aluno"
+              placeholder=""
+              value=""
+              formControlName="email-aluno"
+              required
+            />
+            <div class="invalid-feedback">Email inválido.</div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
