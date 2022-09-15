@@ -44,6 +44,7 @@ import { AlunosComponent } from './private/aluno/alunos/alunos.component';
 import { PaginaInicialComponent } from './private/pagina-inicial/pagina-inicial.component';
 import { AdicionarAlunoComponent } from './private/aluno/alunos/adicionar-aluno/adicionar-aluno.component';
 import { ModalAdicionarAlunoComponent } from './private/aluno/alunos/modal-adicionar-aluno/modal-adicionar-aluno.component';
+import { ImageDirective } from './directives/image.directive';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { ModalAdicionarAlunoComponent } from './private/aluno/alunos/modal-adici
     PaginaInicialComponent,
     AdicionarAlunoComponent,
     ModalAdicionarAlunoComponent,
+    ImageDirective,
   ],
   imports: [
     BrowserModule,
