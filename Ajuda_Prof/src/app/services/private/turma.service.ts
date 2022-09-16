@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { Turma } from 'src/app/private/turma/turma.model';
 import { QueryStringParameters } from 'src/app/shared/classes/query-string-parameters';
 import { ApiEndpointsService } from '../api-endpoints.service';
@@ -8,6 +9,10 @@ import { ApiHttpService } from '../api-http.service';
   providedIn: 'root'
 })
 export class TurmaService {
+
+  private turmaSelecionada = new BehaviorSubject<Turma | null>(null);
+
+  currentTurma = this.turmaSelecionada.asObservable();
 
   constructor(// Application Services
     private apiHttpService: ApiHttpService,
@@ -34,6 +39,14 @@ export class TurmaService {
       // TODO: ALTERAR AQUI O USERNAME
       { usernameProfessor: username, ano: ano, sigla: sigla }
     )
+  }
+
+  setTurmaSelecionada(turma: Turma | null) {
+    this.turmaSelecionada.next(turma);
+  }
+
+  getTurmaSelecionada(): Turma | null {
+    return this.turmaSelecionada.getValue();
   }
 
 

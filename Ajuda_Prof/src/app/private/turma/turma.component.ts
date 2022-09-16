@@ -60,6 +60,8 @@ export class TurmaComponent implements OnInit {
         professor: turma.professor.idProfessor,
         turma: turma.idTurma,
       },
+      state: { prevPage: this.route.url }
     });
+    this.turmaService.setTurmaSelecionada(turma);
   }
 }

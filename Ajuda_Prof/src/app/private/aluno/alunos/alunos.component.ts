@@ -1,11 +1,12 @@
 import {
   AfterViewInit,
   Component,
+  Input,
   OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -15,7 +16,9 @@ import { MockAlunos } from '../mock-alunos';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalAdicionarAlunoComponent } from './modal-adicionar-aluno/modal-adicionar-aluno.component';
 import { AlunoService } from 'src/app/services/private/aluno.service';
-import { first, Subject, takeUntil } from 'rxjs';
+import { filter, first, Subject, takeUntil } from 'rxjs';
+import { Turma } from '../../turma/turma.model';
+import { TurmaService } from 'src/app/services/private/turma.service';
 
 @Component({
   selector: 'app-alunos',
@@ -32,6 +35,7 @@ export class AlunosComponent implements OnInit, AfterViewInit {
   ];
   dataSource = new MatTableDataSource<Aluno>([]);
 
+  turmaAtual: Turma | null;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
@@ -44,7 +48,8 @@ export class AlunosComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private router: Router,
     private modalService: NgbModal,
-    private alunoService: AlunoService
+    private alunoService: AlunoService,
+    private turmaService: TurmaService
   ) {
     this.route.queryParams.subscribe((params) => {
       this.idProfessor = params['professor'];
@@ -53,8 +58,15 @@ export class AlunosComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    console.log(this.idProfessor);
-    console.log(this.idTurma);
+    const previousUrl = history.state.prevPage ?? null;
+    if (!previousUrl) {
+      console.log('page was refreshed!');
+    } else {
+      this.turmaAtual = this.turmaService.getTurmaSelecionada();
+    }
+
+    console.log(this.turmaAtual);
+
     this.getAlunos();
   }
 
@@ -82,8 +94,6 @@ export class AlunosComponent implements OnInit, AfterViewInit {
     this.alunoService.setAlunoEditavelAtual(element);
     const modalRef = this.modalService.open(ModalAdicionarAlunoComponent);
     modalRef.componentInstance.isAdding = false;
-
-    
   }
 
   eliminarAluno(element: Aluno) {
@@ -94,4 +104,6 @@ export class AlunosComponent implements OnInit, AfterViewInit {
     const modalRef = this.modalService.open(ModalAdicionarAlunoComponent);
     modalRef.componentInstance.name = 'World';
   }
+
+  adicionarTeste() {}
 }
