@@ -45,6 +45,7 @@ import { PaginaInicialComponent } from './private/pagina-inicial/pagina-inicial.
 import { AdicionarAlunoComponent } from './private/aluno/alunos/adicionar-aluno/adicionar-aluno.component';
 import { ModalAdicionarAlunoComponent } from './private/aluno/alunos/modal-adicionar-aluno/modal-adicionar-aluno.component';
 import { ImageDirective } from './directives/image.directive';
+import { CriarTesteComponent } from './private/teste/criar-teste/criar-teste.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { ImageDirective } from './directives/image.directive';
     AdicionarAlunoComponent,
     ModalAdicionarAlunoComponent,
     ImageDirective,
+    CriarTesteComponent,
   ],
   imports: [
     BrowserModule,
@@ -95,6 +97,8 @@ import { ImageDirective } from './directives/image.directive';
     MatCardModule,
     MatMenuModule,
   ],
+  exports: [CriarTesteComponent],
+
   providers: [ApiEndpointsService, ApiHttpService, Constants, NgbActiveModal],
   bootstrap: [AppComponent],
 })

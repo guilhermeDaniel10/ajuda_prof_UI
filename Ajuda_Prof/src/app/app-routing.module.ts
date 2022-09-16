@@ -5,6 +5,7 @@ import { AvaliacaoComponent } from './private/avaliacao/avaliacao.component';
 import { TabelaAvaliacaoComponent } from './private/avaliacao/tabela-avaliacao/tabela-avaliacao.component';
 import { TabelaParaExcelComponent } from './private/avaliacao/tabela-avaliacao/tabela-para-excel/tabela-para-excel.component';
 import { PaginaInicialComponent } from './private/pagina-inicial/pagina-inicial.component';
+import { CriarTesteComponent } from './private/teste/criar-teste/criar-teste.component';
 import { TurmaSelecionadaComponent } from './private/turma/turma-selecionada/turma-selecionada.component';
 import { TurmaComponent } from './private/turma/turma.component';
 
@@ -46,7 +47,7 @@ const routes: Routes = [
   },
   {
     path: 'turmas/alunos',
-    component: AlunosComponent,
+    component: AlunosComponent
   },
 ];
 

@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TurmaService } from 'src/app/services/private/turma.service';
+import { EncryptionService } from 'src/app/services/shared/encryption.service';
+import { LocalService } from 'src/app/services/shared/local.service';
 import { ModalAdicionarTurmaComponent } from './modal-adicionar-turma/modal-adicionar-turma.component';
 import { TURMA } from './turma.mock';
 import { Turma } from './turma.model';
@@ -20,7 +22,8 @@ export class TurmaComponent implements OnInit {
   constructor(
     private turmaService: TurmaService,
     private modalService: NgbModal,
-    private route: Router
+    private route: Router,
+    private encriptionService: EncryptionService
   ) {}
 
   ngOnInit() {
@@ -57,10 +60,12 @@ export class TurmaComponent implements OnInit {
     console.log(turma);
     this.route.navigate([`${pageName}`], {
       queryParams: {
-        professor: turma.professor.idProfessor,
-        turma: turma.idTurma,
+        professor: this.encriptionService.encrypt(
+          turma.professor.idProfessor.toString()
+        ),
+        turma: this.encriptionService.encrypt(turma.idTurma.toString()),
       },
-      state: { prevPage: this.route.url }
+      state: { prevPage: this.route.url },
     });
     this.turmaService.setTurmaSelecionada(turma);
   }

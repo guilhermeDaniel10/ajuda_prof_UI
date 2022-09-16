@@ -19,6 +19,7 @@ import { AlunoService } from 'src/app/services/private/aluno.service';
 import { filter, first, Subject, takeUntil } from 'rxjs';
 import { Turma } from '../../turma/turma.model';
 import { TurmaService } from 'src/app/services/private/turma.service';
+import { EncryptionService } from 'src/app/services/shared/encryption.service';
 
 @Component({
   selector: 'app-alunos',
@@ -49,15 +50,19 @@ export class AlunosComponent implements OnInit, AfterViewInit {
     private router: Router,
     private modalService: NgbModal,
     private alunoService: AlunoService,
-    private turmaService: TurmaService
+    private turmaService: TurmaService,
+    private encriptionService: EncryptionService
   ) {
     this.route.queryParams.subscribe((params) => {
-      this.idProfessor = params['professor'];
-      this.idTurma = params['turma'];
+      this.idProfessor = Number(encriptionService.decrypt(params['professor']));
+      this.idTurma = Number(encriptionService.decrypt(params['turma']));
     });
   }
 
   ngOnInit(): void {
+    console.log(this.idProfessor);
+    console.log(this.idTurma);
+    
     const previousUrl = history.state.prevPage ?? null;
     if (!previousUrl) {
       console.log('page was refreshed!');
