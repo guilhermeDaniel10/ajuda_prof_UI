@@ -4,9 +4,6 @@
     *ngFor="let pergunta of perguntas.controls; index as i"
   >
     <ng-container [formGroupName]="i">
-
-        <mat-divider class="divider"></mat-divider>
-        
       <div class="form-group">
         <label for="pergunta">Pergunta</label>
         <input
@@ -17,6 +14,7 @@
           placeholder="Ex: 1 ou 1.1"
           formControlName="pergunta"
         />
+        
       </div>
       <div class="form-group">
         <label class="label-cotacao" for="cotacao">Cotação</label>
@@ -29,11 +27,20 @@
         />
       </div>
 
-      
+      <button
+        type="button"
+        class="removerPergunta btn btn-danger btn-sm"
+        (click)="removePergunta(i)"
+      >
+        Remover Pergunta
+      </button>
+      <mat-divider class="divider"></mat-divider>
     </ng-container>
   </ng-container>
 
   <div class="botoes">
+    <div class="erro_pergunta" *ngIf="perguntaInvalida">Número da pergunta inválido.</div>
+    <div class="erro_pergunta" *ngIf="cotacaoInvalida">Cotação inválida.</div>
     <button
       type="button"
       class="addPergunta btn btn-secondary btn-sm"
