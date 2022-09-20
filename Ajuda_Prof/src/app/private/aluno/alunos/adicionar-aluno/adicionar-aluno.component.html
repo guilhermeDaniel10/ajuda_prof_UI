@@ -18,7 +18,9 @@
               formControlName="numero_aluno"
               required
             />
-            <div class="invalid-feedback">Número inválido.</div>
+            <div class="erro_input" *ngIf="numeroAlunoInvalido">
+              Número do aluno inválido.
+            </div>
           </div>
           <div class="col-7">
             <label for="primeiro_nome_aluno" class="form-label"
@@ -33,7 +35,9 @@
               formControlName="primeiro_nome_aluno"
               required
             />
-            <div class="invalid-feedback">Primeiro Nome inválido.</div>
+            <div class="erro_input" *ngIf="primeiroNomeInvalido">
+              Primeiro nome inválido.
+            </div>
           </div>
           <div class="col-7">
             <label for="ultimo_nome_aluno" class="form-label"
@@ -48,7 +52,10 @@
               formControlName="ultimo_nome_aluno"
               required
             />
-            <div class="invalid-feedback">Último Nome inválido.</div>
+
+            <div class="erro_input" *ngIf="ultimoNomeInvalido">
+              Último nome inválido.
+            </div>
           </div>
           <div class="col-7">
             <label for="email_aluno" class="form-label">Email</label>
@@ -61,7 +68,7 @@
               formControlName="email_aluno"
               required
             />
-            <div class="invalid-feedback">Email inválido.</div>
+            <div class="erro_input" *ngIf="emailInvalido">Email inválido.</div>
           </div>
         </div>
       </form>

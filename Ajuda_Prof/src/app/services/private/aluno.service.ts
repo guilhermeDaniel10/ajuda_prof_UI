@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Aluno } from 'src/app/private/aluno/aluno.model';
 import { QueryStringParameters } from 'src/app/shared/classes/query-string-parameters';
 import { ApiEndpointsService } from '../api-endpoints.service';
@@ -13,6 +13,8 @@ export class AlunoService {
   private alunoEditavelAtualSource = new BehaviorSubject<Aluno | null>(null);
 
   currentAluno = this.alunoEditavelAtualSource.asObservable();
+
+  private subject = new Subject<any>();
 
   constructor(
     private apiHttpService: ApiHttpService,
@@ -44,5 +46,12 @@ export class AlunoService {
 
   getAlunoEditavelAtual(): Aluno | null {
     return this.alunoEditavelAtualSource.getValue();
+  }
+
+  sendClickEvent() {
+    this.subject.next(true);
+  }
+  getClickEvent(): Observable<any> {
+    return this.subject.asObservable();
   }
 }

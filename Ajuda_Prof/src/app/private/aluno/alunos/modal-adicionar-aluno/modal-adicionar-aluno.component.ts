@@ -1,9 +1,10 @@
-import { Component, Input, NgZone, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, NgZone, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import {
   ModalDismissReasons,
   NgbActiveModal,
   NgbModal,
 } from '@ng-bootstrap/ng-bootstrap';
+import { AlunoService } from 'src/app/services/private/aluno.service';
 
 @Component({
   selector: 'app-modal-adicionar-aluno',
@@ -15,16 +16,18 @@ export class ModalAdicionarAlunoComponent implements OnInit {
   closeResult = '';
   tituloModal: string = 'Adicionar Aluno';
 
+  adicionarAlunoEvent: EventEmitter<boolean> = new EventEmitter();
+
+
   constructor(
     private modalService: NgbModal,
     public activeModal: NgbActiveModal,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private alunoService: AlunoService
   ) {}
 
   ngOnInit(): void {
-    if (!this.isAdding) {
-      this.tituloModal = 'Editar Aluno';
-    }
+    
   }
 
   open(content) {
@@ -48,5 +51,9 @@ export class ModalAdicionarAlunoComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  adicionarAlunoButton(){
+    this.alunoService.sendClickEvent();
   }
 }

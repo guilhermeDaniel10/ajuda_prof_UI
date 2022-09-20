@@ -1,4 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  NgZone,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Turma } from 'src/app/private/turma/turma.model';
 import { AlunoService } from 'src/app/services/private/aluno.service';
@@ -11,7 +20,11 @@ import { Aluno } from '../../aluno.model';
   styleUrls: ['./adicionar-aluno.component.scss'],
 })
 export class AdicionarAlunoComponent implements OnInit {
-  
+  numeroAlunoInvalido: boolean = false;
+  primeiroNomeInvalido: boolean = false;
+  ultimoNomeInvalido: boolean = false;
+  emailInvalido: boolean = false;
+
   tituloModal: string = 'Adicionar Aluno';
   alunoExistente: Aluno | null;
   anos_validos: number[] = [];
@@ -25,13 +38,28 @@ export class AdicionarAlunoComponent implements OnInit {
   });
 
   constructor(
-    private turmaService: TurmaService,
     private formBuilder: FormBuilder,
     private alunoService: AlunoService
-  ) {}
+  ) {
+    this.alunoService.getClickEvent().subscribe(() => {
+      this.checkInputs();
+    });
+  }
+
+  checkInputs() {
+    this.numeroAlunoInvalido =
+      !this.numeroAluno || this.numeroAluno == '' ? true : false;
+
+    this.primeiroNomeInvalido =
+      !this.primeiroNome || this.primeiroNome == '' ? true : false;
+
+    this.ultimoNomeInvalido =
+      !this.ultimoNome || this.ultimoNome == '' ? true : false;
+
+    this.emailInvalido = !this.email || this.email == '' ? true : false;
+  }
 
   ngOnInit(): void {
-
     this.alunoExistente = this.alunoService.getAlunoEditavelAtual();
     if (this.alunoExistente) {
       this.setInputWithValues(this.alunoExistente);
@@ -65,20 +93,19 @@ export class AdicionarAlunoComponent implements OnInit {
     });*/
   }
 
-  onSubmit() {
-    /*this.turmaService
-      .adicionarTurma(
-        'teste1',
-        Number(this.ano?.value),
-        String(this.sigla?.value)
-      )
-      .subscribe((data) => console.log(data));*/
+  get numeroAluno() {
+    return this.adicionarAlunoForm.get('numero_aluno')?.value;
   }
 
-  get numeroAluno() {
-    return this.adicionarAlunoForm.get('numero-aluno');
+  get primeiroNome() {
+    return this.adicionarAlunoForm.get('primeiro_nome_aluno')?.value;
   }
-  get sigla() {
-    return this.adicionarAlunoForm.get('sigla');
+
+  get ultimoNome() {
+    return this.adicionarAlunoForm.get('ultimo_nome_aluno')?.value;
+  }
+
+  get email() {
+    return this.adicionarAlunoForm.get('email_aluno')?.value;
   }
 }
