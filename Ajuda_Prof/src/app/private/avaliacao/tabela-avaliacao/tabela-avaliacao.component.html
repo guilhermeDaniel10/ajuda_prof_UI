@@ -1,37 +1,60 @@
-
-  <div class="buttons d-flex justify-content-end">
+<div class="buttons d-flex justify-content-end">
   <button class="save_button" matTooltip="Guardar">
     <mat-icon class="mat_icon">save</mat-icon>
   </button>
-  <button class="save_button pl-2" matTooltip="Exportar para excel" (click)="exportTable()">
+  <button
+    class="save_button pl-2"
+    matTooltip="Exportar para excel"
+    (click)="exportTable()"
+  >
     <mat-icon class="mat_icon">save_alt</mat-icon>
   </button>
 </div>
 <div class="d-flex justify-content-center">
   <!--mat-elevation-z2-->
   <table id="MaterialTable" mat-table [dataSource]="data">
-    <ng-container [matColumnDef]="column" *ngFor="let column of columns; let i = index">
-      <th mat-header-cell *matHeaderCellDef matTooltip="{{tooltips[i]}}">
-        {{tableInfo[i].header}} </th>
+    <ng-container
+      [matColumnDef]="column"
+      *ngFor="let column of columns; let i = index"
+    >
+      <th mat-header-cell *matHeaderCellDef matTooltip="{{ tooltips[i] }}">
+        {{ tableInfo[i].header }}
+      </th>
       <td mat-cell *matCellDef="let element">
         <div class="col-10 center-block">
           <div *ngIf="i !== 0; else nomes">
-            <input type="text" class="form-control form-control-sm center-block" placeholder="Resposta"
-              value="{{element[column].info}}" (input)="inputChange($event, column, element)">
-            <span hidden>{{element[column].info}}</span>
+            <div *ngIf="i < columns.length - 1; else total">
+              <input
+                type="number"
+                step="0.01"
+                min="0"
+                max="{{ tableInfo[i].cotacaoMaxima }}"
+                class="form-control form-control-sm center-block"
+                placeholder="Resposta"
+                value="{{ element[column].info }}"
+                ngModel="{{ element[column].info }}"
+                (input)="inputChange($event, column, element)"
+                (ngModelChange)='preventInput($event, element, column)'
+              />
+              <span hidden>{{ element[column].info }}</span>
+            </div>
+            <ng-template #total>
+              <input 
+              value="{{ element[column].info }}" disabled
+            />
+            </ng-template>
           </div>
           <ng-template #nomes>
-            <div class="nomes_alunos">
-              {{element[column].info}}
+            <div class="nomes_alunos"> 
+              {{ element[column].info }}
             </div>
           </ng-template>
-
         </div>
       </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="columns"></tr>
-    <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns"></tr>
   </table>
 </div>
 <!--<app-tabela-para-excel [nomeTabela]='nomeTabela' [arrayTable]="data"></app-tabela-para-excel>-->

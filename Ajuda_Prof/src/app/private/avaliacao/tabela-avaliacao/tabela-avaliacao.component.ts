@@ -1,8 +1,21 @@
-import { Component, HostListener, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {
+  Component,
+  HostListener,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+} from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Teste } from '../../turma/teste/teste.model';
 import { TESTE } from '../../turma/teste/teste.mock';
 import { Resposta } from '../../turma/teste/resposta/resposta.model';
@@ -15,32 +28,33 @@ import { TooltipPosition } from '@angular/material/tooltip';
 import { ExcelGeneratorService } from './tabela-para-excel/excel-generator.service';
 import { CotacaoResposta } from '../../turma/teste/resposta/cotacao-resposta/cotacao-resposta.model';
 
-
 @Component({
   selector: 'app-tabela-avaliacao',
   templateUrl: './tabela-avaliacao.component.html',
-  styleUrls: ['./tabela-avaliacao.component.scss']
+  styleUrls: ['./tabela-avaliacao.component.scss'],
 })
 export class TabelaAvaliacaoComponent implements OnInit {
-
   testeMock: Teste = TESTE[0];
   perguntas: Pergunta[] = [];
   respostaMock: Resposta[] = RESPOSTA;
   tooltips: string[] = [];
   turma: Turma;
-  nomeTabela: string = "MaterialTable";
+  nomeTabela: string = 'MaterialTable';
   newData: any[] = [];
 
   dataSource = new MatTableDataSource();
   generateTable = false;
   columns: string[];
-  tableInfo: { column: number; header: string | number }[];
+  tableInfo: {
+    column: number;
+    header: string | number;
+    cotacaoMaxima: number | null;
+  }[];
   data: any[];
   dados: any;
+  arrInputs: number[];
 
-  constructor(private tabelaExcelService: ExcelGeneratorService) { }
-
-
+  constructor(private tabelaExcelService: ExcelGeneratorService) {}
 
   ngOnInit(): void {
     this.initTable();
@@ -54,16 +68,13 @@ export class TabelaAvaliacaoComponent implements OnInit {
 
     this.processChanges(eventData, column, aluno);
 
-    console.log(aluno);
-
+    console.log("input");
   }
-
 
   processChanges(eventData: any, column: string, aluno: any) {
     const iteration = aluno[0].iteration;
     this.newData[iteration][column].info = eventData;
   }
-
 
   sumCotacoes(arrCotacoes: CotacaoResposta[]) {
     return arrCotacoes.reduce((a, b) => a + b.cotacaoResposta, 0);
@@ -74,12 +85,10 @@ export class TabelaAvaliacaoComponent implements OnInit {
     this.tableInfo = [];
     this.dados = [];
 
-
     this.respostaMock.map((value, i) => {
-      const nome = value.primeiroNome + " " + value.ultimoNome;
+      const nome = value.primeiroNome + ' ' + value.ultimoNome;
       const respostasCotacao = value.cotacaoResposta;
       let tempDados: TabelaAvaliacao[] = [];
-
 
       tempDados.push({ iteration: i, info: nome });
       respostasCotacao.map((value) => {
@@ -87,36 +96,48 @@ export class TabelaAvaliacaoComponent implements OnInit {
       });
       let total = this.sumCotacoes(respostasCotacao);
       tempDados.push({ iteration: i, info: total });
-      console.log(total);
-      console.log(tempDados);
       this.dados.push(tempDados);
-    })
-    console.log(this.dados);
+    });
 
-
-
-    const cotacaoRespostas = this.respostaMock.map(value => value.cotacaoResposta);
-    console.log(cotacaoRespostas);
+    const cotacaoRespostas = this.respostaMock.map(
+      (value) => value.cotacaoResposta
+    );
     this.data = this.dados;
     this.newData = this.data;
-    this.tableInfo.push({ column: 0, header: "Nome" });
-    this.testeMock.perguntas.map((value) => { this.tableInfo.push({ column: value.iteracao, header: value.pergunta }) });
-    this.tableInfo.push({ column: this.tableInfo.length, header: "Total" });
+    this.tableInfo.push({ column: 0, header: 'Nome', cotacaoMaxima: null });
+    this.testeMock.perguntas.map((value) => {
+      this.tableInfo.push({
+        column: value.iteracao,
+        header: value.pergunta,
+        cotacaoMaxima: value.cotacao,
+      });
+    });
+    this.tableInfo.push({
+      column: this.tableInfo.length,
+      header: 'Total',
+      cotacaoMaxima: null,
+    });
 
-    this.columns = this.tableInfo.map(value => String(value.column));
-
-    console.log(this.tableInfo);
-
-  };
+    this.columns = this.tableInfo.map((value) => String(value.column));
+  }
 
   initTooltips() {
     this.perguntas = this.testeMock.perguntas;
     this.tooltips.push('Nome do aluno');
-    this.perguntas.map(value => this.tooltips.push("Pergunta vale " + value.cotacao + " valores."))
+    this.perguntas.map((value) =>
+      this.tooltips.push('Pergunta vale ' + value.cotacao + ' valores.')
+    );
   }
 
   exportTable() {
-    console.log()
     this.tabelaExcelService.exportTableToExcel(this.nomeTabela);
+  }
+
+  preventInput(event, element, column) {
+    console.log(element);
+    console.log(column);
+    console.log(event);
+    
+   
   }
 }
