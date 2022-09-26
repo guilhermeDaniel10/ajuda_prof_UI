@@ -46,6 +46,7 @@ import { AdicionarAlunoComponent } from './private/aluno/alunos/adicionar-aluno/
 import { ModalAdicionarAlunoComponent } from './private/aluno/alunos/modal-adicionar-aluno/modal-adicionar-aluno.component';
 import { ImageDirective } from './directives/image.directive';
 import { CriarTesteComponent } from './private/teste/criar-teste/criar-teste.component';
+import { CotacoesComponent } from './private/avaliacao/tabela-avaliacao/cotacoes/cotacoes.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { CriarTesteComponent } from './private/teste/criar-teste/criar-teste.com
     ModalAdicionarAlunoComponent,
     ImageDirective,
     CriarTesteComponent,
+    CotacoesComponent,
   ],
   imports: [
     BrowserModule,
@@ -97,7 +99,7 @@ import { CriarTesteComponent } from './private/teste/criar-teste/criar-teste.com
     MatCardModule,
     MatMenuModule,
   ],
-  exports: [CriarTesteComponent],
+  exports: [CriarTesteComponent, CotacoesComponent],
 
   providers: [ApiEndpointsService, ApiHttpService, Constants, NgbActiveModal],
   bootstrap: [AppComponent],

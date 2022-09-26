@@ -30,7 +30,7 @@ const routes: Routes = [
           {
             path: 'tabela-excel',
             component: TabelaParaExcelComponent,
-          },
+          }
         ],
       },
     ],

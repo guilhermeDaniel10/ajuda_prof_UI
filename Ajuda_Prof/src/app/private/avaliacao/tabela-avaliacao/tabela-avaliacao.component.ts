@@ -53,6 +53,11 @@ export class TabelaAvaliacaoComponent implements OnInit {
   data: any[];
   dados: any;
   arrInputs: number[];
+  validInfo: {
+    column: number;
+    header: string | number;
+    cotacaoMaxima: number | null;
+  }[];
 
   constructor(private tabelaExcelService: ExcelGeneratorService) {}
 
@@ -64,11 +69,10 @@ export class TabelaAvaliacaoComponent implements OnInit {
   }
 
   inputChange(event: any, column: string, aluno: any): void {
-    const eventData = event.target?.value;
+    /*const eventData = event.target?.value;
 
     this.processChanges(eventData, column, aluno);
-
-    console.log("input");
+*/
   }
 
   processChanges(eventData: any, column: string, aluno: any) {
@@ -83,6 +87,7 @@ export class TabelaAvaliacaoComponent implements OnInit {
   initTable() {
     this.turma = this.testeMock.turma;
     this.tableInfo = [];
+    this.validInfo = [];
     this.dados = [];
 
     this.respostaMock.map((value, i) => {
@@ -111,6 +116,11 @@ export class TabelaAvaliacaoComponent implements OnInit {
         header: value.pergunta,
         cotacaoMaxima: value.cotacao,
       });
+      this.validInfo.push({
+        column: value.iteracao,
+        header: value.pergunta,
+        cotacaoMaxima: value.cotacao,
+      });
     });
     this.tableInfo.push({
       column: this.tableInfo.length,
@@ -119,6 +129,8 @@ export class TabelaAvaliacaoComponent implements OnInit {
     });
 
     this.columns = this.tableInfo.map((value) => String(value.column));
+
+
   }
 
   initTooltips() {
@@ -133,11 +145,19 @@ export class TabelaAvaliacaoComponent implements OnInit {
     this.tabelaExcelService.exportTableToExcel(this.nomeTabela);
   }
 
-  preventInput(event, element, column) {
-    console.log(element);
-    console.log(column);
-    console.log(event);
-    
-   
+  preventInput(event, input: any = null, lineNumber, column, max) {
+    let value = +event;
+    if (event < 0) value = 0;
+    if (value > max) value = max;
+
+    console.log(input.value);
+    console.log(max);
+    this.data[lineNumber][column].info = value;
+
+    if (input.value != value) {
+      const start = input.selectionStart ? input.selectionStart - 1 : -1;
+      input.value = value;
+      if (start > 0) input.selectionStart = input.selectionEnd = start;
+    }
   }
 }
