@@ -1,16 +1,22 @@
 table {
-  width: 40%;
-  margin-top: 0.3em;
+  border-collapse: collapse;
+  width: 100%;
+}
+th {
+  border: 1px solid #adadad;
+  font-weight: normal;
+  background-color: #adadad;
+  color: #fcfcfc;
+  font-size: 0.8rem;
+}
+td,
+th {
+  
+  text-align: center;
+  padding: 8px;
 }
 
-td,th {
-  width: 0%;
+td {
+  border: 1px solid #d6d6d6;
   font-size: 0.7rem;
-  text-align: center;
-  vertical-align: middle;
-}
-
-.titulo {
-  text-align: center;
-  margin-top: 1.9em;
 }

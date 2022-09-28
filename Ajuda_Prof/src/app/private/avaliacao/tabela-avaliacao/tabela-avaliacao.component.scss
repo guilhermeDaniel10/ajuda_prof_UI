@@ -24,13 +24,14 @@ th.mat-header-cell {
   text-align: center !important;
 }
 
+
 mat-header-cell,
 mat-cell {
   justify-content: center;
 }
 
 .form-control {
-  font-size: 0.65rem;
+  font-size: 0.66rem;
   background-color: #fcfcfc !important;
 }
 
@@ -44,12 +45,12 @@ input {
 }
 
 .nomes_alunos {
-  font-size: 0.65rem;
+  font-size: 0.66rem;
 }
 
 .mat_icon {
   color: #909090;
-  font-size: 1.2rem;
+  font-size: 1.32rem;
 }
 
 .menu-span {
@@ -71,4 +72,12 @@ input {
   text-align: center;
 }
 
+.popover{
+  max-width:200px;
+  height:250px;    
+}
+
+.whole-cont{
+  min-height:85vh;
+}
 

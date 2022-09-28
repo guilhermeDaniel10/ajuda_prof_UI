@@ -13,9 +13,11 @@ export class CotacoesComponent implements OnInit {
     cotacaoMaxima: number | null;
   }[];
 
+  headers = ['Pergunta', 'Cotação Máxima'];
+
   dataSource: {
-    pergunta: string | number;
-    cotacaoMaxima: number | null;
+    "Pergunta": string | number;
+    "Cotação Máxima": number | null;
   }[] = [];
   displayedColumns: string[] = ['pergunta', 'cotacaoMaxima'];
   dadosTabela: Tabela;
@@ -33,8 +35,8 @@ export class CotacoesComponent implements OnInit {
     let dados: any[] = [];
     this.infoTabela.map((value) => {
       this.dataSource.push({
-        pergunta: value.header,
-        cotacaoMaxima: value.cotacaoMaxima,
+        "Pergunta": value.header,
+        "Cotação Máxima": value.cotacaoMaxima,
       });
     });
     console.log(this.dataSource);

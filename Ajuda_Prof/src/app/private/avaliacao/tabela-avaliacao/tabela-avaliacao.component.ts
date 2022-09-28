@@ -129,8 +129,6 @@ export class TabelaAvaliacaoComponent implements OnInit {
     });
 
     this.columns = this.tableInfo.map((value) => String(value.column));
-
-
   }
 
   initTooltips() {
@@ -145,7 +143,7 @@ export class TabelaAvaliacaoComponent implements OnInit {
     this.tabelaExcelService.exportTableToExcel(this.nomeTabela);
   }
 
-  preventInput(event, input: any = null, lineNumber, column, max) {
+  checkInput(event, input: any = null, lineNumber, column, max) {
     let value = +event;
     if (event < 0) value = 0;
     if (value > max) value = max;
@@ -159,5 +157,22 @@ export class TabelaAvaliacaoComponent implements OnInit {
       input.value = value;
       if (start > 0) input.selectionStart = input.selectionEnd = start;
     }
+    const lineLength = this.data[lineNumber].length;
+
+    const sum = this.somarArray(lineNumber, column, value);
+
+    this.data[lineNumber][lineLength - 1].info = sum;
+  }
+
+  somarArray(lineNumber, currentIndex: number, currentInput: number): number {
+    let sum = 0;
+    for (let i = 1; i < this.data[lineNumber].length - 1; i++) {
+      if (i != currentIndex) {
+        sum += this.data[lineNumber][i].info;
+      }
+    }
+    sum += currentInput;
+
+    return Math.round((sum + Number.EPSILON) * 100) / 100;
   }
 }

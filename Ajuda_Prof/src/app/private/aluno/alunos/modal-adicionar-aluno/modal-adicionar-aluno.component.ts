@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, NgZone, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  NgZone,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import {
   ModalDismissReasons,
   NgbActiveModal,
@@ -18,7 +26,6 @@ export class ModalAdicionarAlunoComponent implements OnInit {
 
   adicionarAlunoEvent: EventEmitter<boolean> = new EventEmitter();
 
-
   constructor(
     private modalService: NgbModal,
     public activeModal: NgbActiveModal,
@@ -27,7 +34,9 @@ export class ModalAdicionarAlunoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    
+    if (!this.isAdding) {
+      this.tituloModal = 'Editar Aluno';
+    }
   }
 
   open(content) {
@@ -53,7 +62,7 @@ export class ModalAdicionarAlunoComponent implements OnInit {
     }
   }
 
-  adicionarAlunoButton(){
+  adicionarAlunoButton() {
     this.alunoService.sendClickEvent();
   }
 }
