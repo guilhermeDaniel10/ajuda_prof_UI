@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { filter, Observable } from 'rxjs';
 import { ImageService } from 'src/app/services/shared/image.service';
 
@@ -7,11 +7,19 @@ import { ImageService } from 'src/app/services/shared/image.service';
   templateUrl: './pagina-inicial.component.html',
   styleUrls: ['./pagina-inicial.component.scss'],
 })
-export class PaginaInicialComponent {
+export class PaginaInicialComponent implements OnInit {
+
+  canLoad: boolean = false;
   
   constructor(private imageService: ImageService) {
     imageService.imagesLoading$.pipe(filter((r) => r === 0)).subscribe((_) => {
       console.log('all images loaded');
     });
+  }
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.canLoad = true;
+    }, 3000);
   }
 }

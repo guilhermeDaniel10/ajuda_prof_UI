@@ -25,6 +25,7 @@ import { TabelaComponent } from './shared/tabela/tabela.component';
 import { TabelaAvaliacaoComponent } from './private/avaliacao/tabela-avaliacao/tabela-avaliacao.component';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
@@ -100,6 +101,7 @@ import { TesteComponent } from './private/teste/teste/teste.component';
     MatTooltipModule,
     MatCardModule,
     MatMenuModule,
+    MatProgressSpinnerModule
   ],
   exports: [CriarTesteComponent, CotacoesComponent],
 
