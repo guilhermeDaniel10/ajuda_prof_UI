@@ -1,49 +1,72 @@
-<div class="page-container">
-    <div class="chains">
-        <div class="cards">
-            <ng-container *ngFor="let turma of turmas; let i = index">
-
-                <!--(click)="turmaSelecionada()" routerLink="selecionada"-->
-                <mat-card type="button" class="example-card">
-                    <div type="button" (click)="goToPage('turmas/alunos', turma)">
-                        <mat-card-header>
-                            <mat-card-title>{{turma.ano}}º{{turma.sigla}}</mat-card-title>
-                            <mat-card-subtitle>{{turma.professor.escola}}</mat-card-subtitle>
-                        </mat-card-header>
-                        <img mat-card-image src="assets/logo_isep.png" alt="Logo escola">
-                        <mat-card-content>
-                            <p>
-                                Um texto qualquer informativo, possivelmente com o número de alunos e de testes ao longo
-                                de
-                                um ano
-                            </p>
-                        </mat-card-content>
-                    </div>
-                    <mat-card-actions>
-                        <button mat-button>Avaliações</button>
-                        <button mat-button [matMenuTriggerFor]="menu">Mais</button>
-                        <mat-menu #menu="matMenu">
-                            <button mat-menu-item (click)="goToPage('turmas/alunos', turma)">Alunos</button>
-                            <button mat-menu-item (click)="goToPage('turmas/alunos', turma)">Criar Teste</button>
-                            <button mat-menu-item>Estatísticas</button>
-                        </mat-menu>
-                    </mat-card-actions>
-                </mat-card>
-
-            </ng-container>
-
-        </div>
-
+<div class="whole">
+<section class="py-5 text-center">
+  <div class="row py-lg-2">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">Turmas do professor</h1>
+      <p class="lead text-muted">
+        Aqui encontra todas as turmas que leciona, juntamente com as avaliações
+        dos testes, alunos e estatísticas.
+      </p>
     </div>
+  </div>
+</section>
+
+<mat-divider></mat-divider>
+
+<div class="page-container">
+  <div class="chains">
+    <div class="cards">
+      <ng-container *ngFor="let turma of turmas; let i = index">
+        <!--(click)="turmaSelecionada()" routerLink="selecionada"-->
+        <mat-card type="button" class="example-card">
+          <div type="button" (click)="goToPage('turmas/alunos', turma)">
+            <mat-card-header>
+              <mat-card-title>{{ turma.ano }}º{{ turma.sigla }}</mat-card-title>
+              <mat-card-subtitle>{{
+                turma.professor.escola
+              }}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image src="assets/logo_isep.png" alt="Logo escola" />
+            <mat-card-content>
+              <p>
+                Um texto qualquer informativo, possivelmente com o número de
+                alunos e de testes ao longo de um ano
+              </p>
+            </mat-card-content>
+          </div>
+          <mat-card-actions>
+            <button mat-button>Avaliações</button>
+            <button mat-button [matMenuTriggerFor]="menu">Mais</button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="goToPage('turmas/alunos', turma)">
+                Alunos
+              </button>
+              <button mat-menu-item (click)="goToPage('turmas/alunos', turma)">
+                Criar Teste
+              </button>
+              <button mat-menu-item>Estatísticas</button>
+            </mat-menu>
+          </mat-card-actions>
+        </mat-card>
+      </ng-container>
+    </div>
+  </div>
 </div>
 <div *ngIf="isAddVisible" class="fac_class">
-    <div class="fab_icon">
-        <!--(click)="tShowAdu()"-->
-        <a mat-mini-fab color="turma" routerLink="." matTooltip="Adicionar Turma" [matTooltipPosition]="'left'"
-            (click)="adicionarTurma()">
-            <mat-icon>add</mat-icon>
-        </a>
-    </div>
+  <div class="fab_icon">
+    <!--(click)="tShowAdu()"-->
+    <a
+      mat-mini-fab
+      color="turma"
+      routerLink="."
+      matTooltip="Adicionar Turma"
+      [matTooltipPosition]="'left'"
+      (click)="adicionarTurma()"
+    >
+      <mat-icon>add</mat-icon>
+    </a>
+  </div>
 </div>
 
 <router-outlet></router-outlet>
+</div>

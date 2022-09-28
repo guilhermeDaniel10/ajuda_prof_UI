@@ -47,6 +47,7 @@ import { ModalAdicionarAlunoComponent } from './private/aluno/alunos/modal-adici
 import { ImageDirective } from './directives/image.directive';
 import { CriarTesteComponent } from './private/teste/criar-teste/criar-teste.component';
 import { CotacoesComponent } from './private/avaliacao/tabela-avaliacao/cotacoes/cotacoes.component';
+import { TesteComponent } from './private/teste/teste/teste.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { CotacoesComponent } from './private/avaliacao/tabela-avaliacao/cotacoes
     ImageDirective,
     CriarTesteComponent,
     CotacoesComponent,
+    TesteComponent,
   ],
   imports: [
     BrowserModule,

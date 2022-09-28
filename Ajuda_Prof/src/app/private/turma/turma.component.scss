@@ -1,5 +1,6 @@
-.page-container {
+.whole {
   //width: 100%;
+  overflow-x: hidden;
 }
 
 .chains {
@@ -48,9 +49,8 @@ mat-card {
 @media (min-width: 900px) {
   .cards {
     grid-template-columns: repeat(4, 1fr);
-  }; 
+  }
 }
-
 
 @media (max-width: 630px) {
   .cards {
@@ -59,13 +59,20 @@ mat-card {
 }
 
 @media (max-width: 486px) {
-    .cards {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
   }
+}
 
-  @media (max-width: 335px) {
-    .cards {
-      grid-template-columns: repeat(1, 1fr);
-    }
+@media (max-width: 335px) {
+  .cards {
+    grid-template-columns: repeat(1, 1fr);
   }
+}
+
+mat-divider {
+  margin: auto;
+  width: 70%;
+  margin-bottom: 3rem;
+  background-color: #fcfcfc;
+}
