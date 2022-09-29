@@ -36,12 +36,15 @@ export class AlunosComponent implements OnInit, AfterViewInit {
   ];
   dataSource = new MatTableDataSource<Aluno>([]);
 
-  turmaAtual: Turma | null;
+  turmaAtual: string;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
   idProfessor: number;
   idTurma: number;
+  ano: number;
+  sig: string;
+
   alunos: Aluno[];
   alunoEditavelAtual: Aluno;
 
@@ -56,20 +59,23 @@ export class AlunosComponent implements OnInit, AfterViewInit {
     this.route.queryParams.subscribe((params) => {
       this.idProfessor = Number(encriptionService.decrypt(params['professor']));
       this.idTurma = Number(encriptionService.decrypt(params['turma']));
+      this.ano = Number(encriptionService.decrypt(params['ano']));
+      this.sig = encriptionService.decrypt(params['sig']);
     });
   }
 
   ngOnInit(): void {
     console.log(this.idProfessor);
     console.log(this.idTurma);
-    
-    const previousUrl = history.state.prevPage ?? null;
+
+    /*const previousUrl = history.state.prevPage ?? null;
     if (!previousUrl) {
       console.log('page was refreshed!');
     } else {
       this.turmaAtual = this.turmaService.getTurmaSelecionada();
-    }
+    }*/
 
+    this.turmaAtual = this.ano + 'º' + this.sig;
     console.log(this.turmaAtual);
 
     this.getAlunos();

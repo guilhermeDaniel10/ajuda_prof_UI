@@ -1,9 +1,25 @@
 .addPergunta {
+    color: white;
+    font-weight: 500;
+    background-color: #0074b7;
+    font-size: 15px;
+    margin-top: 0.5em;
+    border-radius: 6px;
+    border: 0.3px solid #ced4da;
+    padding: 5px 8px;
     margin-right: 0.5em;
 }
 
+.addPergunta:hover {
+    transition: 0.15s;
+    opacity: 0.8;
+}
+
 .botoes {
+    display: block;
+    text-align: right;
     margin-top: 0.5em;
+    
 }
 
 .label-cotacao {
@@ -15,11 +31,45 @@
     margin-bottom: 0.5em;
 }
 
+.remover {
+    width: 100%;
+    display: block;
+}
+
+.mt-divider {
+    
+    display: block;
+}
 .removerPergunta {
-    margin-top: 0.3em;
+    
+    color: white;
+    font-weight: 500;
+    background-color: #f44336;
+    font-size: 12px;
+    margin-top: 0.5em;
+    border-radius: 8px;
+    border: 0.3px solid #ced4da;
+    padding: 3px 8px;
+}
+
+.removerPergunta:hover {
+    transition: 0.15s;
+    opacity: 0.8;
 }
 
 .erro_pergunta {
     font-size: small;
     color: rgb(255, 0, 0);
+}
+
+.submeter {
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+    background-color: #4CAF50;
+    font-size: 15px;
+    margin-top: 0.5em;
+    border-radius: 6px;
+    border: 0.3px solid #ced4da;
+    padding: 5px 8px;
+    margin-right: 0em;
 }

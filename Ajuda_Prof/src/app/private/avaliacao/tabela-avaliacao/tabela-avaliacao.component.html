@@ -3,7 +3,7 @@
     <h2>Avaliação do teste qualquer coisa</h2>
   </div>
 
-  <div class="buttons d-flex justify-content-end">
+  <div class="buttons">
     <button
       matTooltip="Cotações"
       class="save_button"
@@ -34,7 +34,7 @@
         [matColumnDef]="column"
         *ngFor="let column of columns; let i = index"
       >
-        <th mat-header-cell *matHeaderCellDef matTooltip="{{ tooltips[i] }}">
+        <th mat-header-cell *matHeaderCellDef matTooltip="{{ tooltips[i] }}" [matTooltipPosition]="'above'">
           {{ tableInfo[i].header }}
         </th>
         <td mat-cell *matCellDef="let element; let lineNumber = index">

@@ -64,6 +64,8 @@ export class TurmaComponent implements OnInit {
           turma.professor.idProfessor.toString()
         ),
         turma: this.encriptionService.encrypt(turma.idTurma.toString()),
+        ano: this.encriptionService.encrypt(turma.ano.toString()),
+        sig: this.encriptionService.encrypt(turma.sigla.toString()),
       },
       state: { prevPage: this.route.url },
     });
