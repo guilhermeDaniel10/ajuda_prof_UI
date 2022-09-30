@@ -1,83 +1,160 @@
 .addPergunta {
-    color: white;
-    font-weight: 450;
-    background-color: #0074b7;
-    font-size: 14px;
-    margin-top: 0.5em;
-    border-radius: 6px;
-    border: 0.3px solid #ced4da;
-    padding: 5px 8px;
-    margin-right: 0.5em;
+  color: white;
+  font-weight: 450;
+  background-color: #0074b7;
+  font-size: 14px;
+  margin-top: 0.5em;
+  border-radius: 6px;
+  border: 0.3px solid #ced4da;
+  padding: 5px 8px;
+  margin-right: 0.5em;
+}
+
+.reset {
+  color: white;
+  font-weight: 450;
+  background-color: #f44336;
+  font-size: 13px;
+  margin-top: 0.5em;
+  border-radius: 6px;
+  border: 0.3px solid #ced4da;
+  padding: 5px 8px;
+}
+
+.modal-body {
+  font-size: 12px;
+}
+
+.modal-title {
+  font-weight: 400;
+}
+
+.reset-all {
+  color: white;
+  font-weight: 450;
+  background-color: #f44336;
+  font-size: 13px;
+  margin-top: 0.5em;
+  border-radius: 6px;
+  border: 0.3px solid #ced4da;
+  padding: 5px 8px;
+}
+
+.reset-space {
+  margin-top: 8px;
+  display: block;
+  text-align: right;
 }
 
 .addPergunta:hover {
-    transition: 0.15s;
-    opacity: 0.8;
+  transition: 0.15s;
+  opacity: 0.8;
 }
 
 .botoes {
-    display: block;
-    text-align: right;
-    margin-top: 0.5em;
-    
+  display: block;
+  text-align: right;
+  margin-top: 0.5em;
 }
 
 .invalid {
-    border: 1px solid red;
-  }
+  border: 1px solid red;
+}
 
 .label-cotacao {
-    margin-top: 0.5em;
+  margin-top: 0.5em;
 }
 
 .divider {
-    margin-top: 0.8em;
-    margin-bottom: 0.5em;
+  margin-top: 0.8em;
+  margin-bottom: 0.5em;
 }
 
 .remover {
-    width: 100%;
-    display: block;
+  width: 100%;
+  display: block;
 }
 
 .mt-divider {
-    
-    display: block;
+  display: block;
 }
 .removerPergunta {
-    
-    color: white;
-    font-weight: 520;
-    background-color: #f44336;
-    font-size: 11px;
-    margin-top: 0.5em;
-    border-radius: 8px;
-    border: 0.3px solid #ced4da;
-    padding: 3px 8px;
+  color: white;
+  font-weight: 520;
+  background-color: #f44336;
+  font-size: 11px;
+  margin-top: 0.5em;
+  border-radius: 8px;
+  border: 0.3px solid #ced4da;
+  padding: 3px 8px;
 }
 
 .removerPergunta:hover {
-    transition: 0.15s;
-    opacity: 0.8;
+  transition: 0.15s;
+  opacity: 0.8;
 }
 
 .erro_pergunta {
-    font-size: small;
-    color: rgb(255, 0, 0);
+  font-size: small;
+  color: rgb(255, 0, 0);
 }
 
-.ng-invalid:not(form)  {
-    border: 2px solid red /* red */
-  }
+.ng-invalid:not(form) {
+  border: 2px solid red; /* red */
+}
 
 .submeter {
-    color: rgb(255, 255, 255);
-    font-weight: 450;
-    background-color: #4CAF50;
-    font-size: 14px;
-    margin-top: 0.5em;
-    border-radius: 6px;
-    border: 0.3px solid #ced4da;
-    padding: 5px 8px;
-    margin-right: 0em;
+  color: rgb(255, 255, 255);
+  font-weight: 450;
+  background-color: #4caf50;
+  font-size: 14px;
+  margin-top: 0.5em;
+  border-radius: 6px;
+  border: 0.3px solid #ced4da;
+  padding: 5px 8px;
+  margin-right: 0em;
+}
+
+.as-bold {
+  font-weight: 600;
+}
+
+.ind-pergunta {
+  margin-bottom: 0.4em;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.pergunta {
+  text-align: center;
+}
+
+.cotacao {
+  text-align: center;
+}
+
+.order {
+  display: grid;
+  grid-template-columns: 52% 1fr;
+  margin-top: 1rem;
+}
+
+.repitidos {
+  font-size: 13px;
+  color: #ff0000;
+}
+.success_submit {
+  color: rgb(255, 255, 255);
+  font-weight: 450;
+  background-color: #4caf50;
+  font-size: 14px;
+  margin-top: 0.5em;
+  border-radius: 6px;
+  border: 0.3px solid #ced4da;
+  padding: 5px 8px;
+  margin-right: 0em;
+}
+
+.switch {
+    margin-top: 2px;
 }

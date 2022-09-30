@@ -1,4 +1,4 @@
-<form [formGroup]="form" (submit)="submit(form.value)">
+<form [formGroup]="form">
   <ng-container
     formArrayName="perguntas"
     *ngFor="let pergunta of perguntas.controls; index as i"
@@ -13,7 +13,9 @@
           aria-describedby="perguntaHelp"
           placeholder="Ex: 1 ou 1.1"
           formControlName="pergunta"
-          [class.invalid]="incorrectPerguntaIndex.indexOf(i) > -1 && perguntaInvalida"
+          [class.invalid]="
+            incorrectPerguntaIndex.indexOf(i) > -1 && perguntaInvalida
+          "
         />
       </div>
 
@@ -21,14 +23,16 @@
         <small class="text-danger">Número da pergunta obrigatório. </small>
       </div>
       <div class="form-group">
-        <label class="label-cotacao" for="cotacao">Cotação</label>
+        <label class="label-cotacao" for="cotacao">Cotação Máxima</label>
         <input
           type="number"
           class="form-control"
           id="cotacaoInput"
           placeholder="Ex: 10"
           formControlName="cotacao"
-          [class.invalid]="incorrectCotacaoIndex.indexOf(i) > -1 && cotacaoInvalida"
+          [class.invalid]="
+            incorrectCotacaoIndex.indexOf(i) > -1 && cotacaoInvalida
+          "
           min="0"
         />
         <div *ngIf="incorrectCotacaoIndex.indexOf(i) > -1">
@@ -51,6 +55,10 @@
     </ng-container>
   </ng-container>
 
+  <div class="repitidos" *ngIf="temRepitidos">
+    Não podem existir perguntas repitidas.
+  </div>
+
   <!--<div class="erros">
     <div class="erro_pergunta" *ngIf="perguntaInvalida">
       Número da pergunta inválido.
@@ -58,9 +66,78 @@
     <div class="erro_pergunta" *ngIf="cotacaoInvalida">Cotação inválida.</div>
   </div>-->
   <div class="botoes">
-    <button type="button" class="addPergunta" (click)="addPergunta()">
+    <button type="button" class="addPergunta" (click)="addPergunta(form.value)">
       Adicionar Pergunta
     </button>
-    <button class="submeter" type="submit">Submeter</button>
+    <button class="submeter" (click)="open(content_submit, form.value)">
+      Submeter
+    </button>
+  </div>
+  <div class="reset-space">
+    <button type="button" class="reset" (click)="open(content_reset)">
+      Repôr
+    </button>
   </div>
 </form>
+
+<ng-template #content_reset let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Repôr Perguntas</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <p>
+      Tem a certeza que pretende repôr todas as perguntas? Assim que o fizer,
+      irá perder as informações do teste que estava a criar.
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="reset-all" (click)="reset(modal, form.value)">
+      Sim
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #content_submit let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Submeter Teste</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <p>
+      Tem a certeza que pretende submeter o teste com as seguintes perguntas:
+    </p>
+    <div *ngFor="let pergunta of perguntasAsObj">
+      <div class="ind-pergunta">
+        <span class="as-bold pergunta">Pergunta: </span>{{ pergunta.pergunta }}
+        <span class="as-bold cotacao">Cotação: </span>{{ pergunta.cotacao }}
+      </div>
+    </div>
+    <div class="order">
+      <span >Ordenar as perguntas por ordem crescente?</span>
+      <label class="switch">
+        <input type="checkbox" id="company-survey-checker" (change)="checkCheckBoxvalue($event, form.value)">
+      </label>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="success_submit"
+      (click)="submit(form.value, modal)"
+    >
+      Sim
+    </button>
+  </div>
+</ng-template>

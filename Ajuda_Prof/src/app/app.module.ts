@@ -33,6 +33,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatRadioButton} from '@angular/material/radio';
 import { MatMenuModule } from '@angular/material/menu';
 import { AvaliacaoComponent } from './private/avaliacao/avaliacao.component';
 import { TabelaParaExcelComponent } from './private/avaliacao/tabela-avaliacao/tabela-para-excel/tabela-para-excel.component';
@@ -49,6 +50,7 @@ import { ImageDirective } from './directives/image.directive';
 import { CriarTesteComponent } from './private/teste/criar-teste/criar-teste.component';
 import { CotacoesComponent } from './private/avaliacao/tabela-avaliacao/cotacoes/cotacoes.component';
 import { TesteComponent } from './private/teste/teste/teste.component';
+import { OffcanvasCriarTesteComponent } from './private/teste/criar-teste/offcanvas-criar-teste/offcanvas-criar-teste.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +77,7 @@ import { TesteComponent } from './private/teste/teste/teste.component';
     CriarTesteComponent,
     CotacoesComponent,
     TesteComponent,
+    OffcanvasCriarTesteComponent,
   ],
   imports: [
     BrowserModule,
@@ -101,9 +104,10 @@ import { TesteComponent } from './private/teste/teste/teste.component';
     MatTooltipModule,
     MatCardModule,
     MatMenuModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    
   ],
-  exports: [CriarTesteComponent, CotacoesComponent],
+  exports: [CriarTesteComponent, CotacoesComponent, OffcanvasCriarTesteComponent],
 
   providers: [ApiEndpointsService, ApiHttpService, Constants, NgbActiveModal],
   bootstrap: [AppComponent],
