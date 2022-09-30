@@ -13,12 +13,15 @@ import { FormArray } from '@angular/forms';
   styleUrls: ['./criar-teste.component.scss'],
 })
 export class CriarTesteComponent implements OnInit {
-
   perguntaInvalida: boolean = false;
   cotacaoInvalida: boolean = false;
+  incorrectPerguntaIndex: number[] = [];
+  incorrectCotacaoIndex: number[] = [];
   constructor(private formBuilder: FormBuilder) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.invalidIndex;
+  }
 
   data = [{ pergunta: '', cotacao: '' }];
 
@@ -32,14 +35,23 @@ export class CriarTesteComponent implements OnInit {
     return this.form.get('perguntas') as FormArray;
   }
 
+  get invalidIndex(): any[] {
+    let incorrects = [];
+    this.perguntas.value.map((value) => {
+      if (!value.pergunta) {
+        console.log('invalid');
+      }
+    });
+    return incorrects;
+  }
+
   addPergunta() {
     this.emptyValidators();
     console.log(this.checkValidators());
-    
-    if(this.checkValidators()){
+
+    if (this.checkValidators()) {
       return;
     }
-
 
     if (this.perguntas)
       this.perguntas.push(
@@ -50,20 +62,26 @@ export class CriarTesteComponent implements OnInit {
       );
   }
 
-  emptyValidators(){
+  emptyValidators() {
+    this.incorrectPerguntaIndex = [];
+    this.incorrectCotacaoIndex = [];
     this.perguntaInvalida = false;
     this.cotacaoInvalida = false;
   }
 
-  checkValidators(): boolean{
-    const lastValidElement = this.perguntas.value[this.perguntas.length - 1];
+  checkValidators(): boolean {
+   
+    const perguntas = this.perguntas.value;
+    for (let i = 0; i < perguntas.length; i++) {
+      if (!perguntas[i].pergunta) {
+        this.incorrectPerguntaIndex.push(i);
+        this.perguntaInvalida = true;
+      }
 
-    if(!lastValidElement.pergunta){
-      this.perguntaInvalida = true;
-    }
-
-    if(!lastValidElement.cotacao){
-      this.cotacaoInvalida = true;
+      if (!perguntas[i].cotacao) {
+        this.incorrectCotacaoIndex.push(i);
+        this.cotacaoInvalida = true;
+      }
     }
 
     return this.perguntaInvalida || this.cotacaoInvalida;

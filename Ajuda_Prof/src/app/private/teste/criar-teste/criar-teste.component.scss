@@ -1,8 +1,8 @@
 .addPergunta {
     color: white;
-    font-weight: 500;
+    font-weight: 450;
     background-color: #0074b7;
-    font-size: 15px;
+    font-size: 14px;
     margin-top: 0.5em;
     border-radius: 6px;
     border: 0.3px solid #ced4da;
@@ -21,6 +21,10 @@
     margin-top: 0.5em;
     
 }
+
+.invalid {
+    border: 1px solid red;
+  }
 
 .label-cotacao {
     margin-top: 0.5em;
@@ -43,9 +47,9 @@
 .removerPergunta {
     
     color: white;
-    font-weight: 500;
+    font-weight: 520;
     background-color: #f44336;
-    font-size: 12px;
+    font-size: 11px;
     margin-top: 0.5em;
     border-radius: 8px;
     border: 0.3px solid #ced4da;
@@ -62,11 +66,15 @@
     color: rgb(255, 0, 0);
 }
 
+.ng-invalid:not(form)  {
+    border: 2px solid red /* red */
+  }
+
 .submeter {
     color: rgb(255, 255, 255);
-    font-weight: 500;
+    font-weight: 450;
     background-color: #4CAF50;
-    font-size: 15px;
+    font-size: 14px;
     margin-top: 0.5em;
     border-radius: 6px;
     border: 0.3px solid #ced4da;
