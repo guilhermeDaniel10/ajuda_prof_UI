@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { FormArray } from '@angular/forms';
+import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -24,13 +25,19 @@ export class CriarTesteComponent implements OnInit {
   closeResult = '';
   isChecked: boolean = false;
   perguntasAsObj: { pergunta: any; cotacao: any }[] = [];
+  
 
   constructor(
     private formBuilder: FormBuilder,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private _adapter: DateAdapter<any>,
+    @Inject(MAT_DATE_LOCALE) private _locale: string
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._locale = 'pt';
+    this._adapter.setLocale(this._locale);
+  }
 
   data = [{ pergunta: '', cotacao: '' }];
 

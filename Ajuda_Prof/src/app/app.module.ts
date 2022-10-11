@@ -33,7 +33,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatRadioButton} from '@angular/material/radio';
+import { MatNativeDateModule } from '@angular/material/core';
+
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatMenuModule } from '@angular/material/menu';
 import { AvaliacaoComponent } from './private/avaliacao/avaliacao.component';
 import { TabelaParaExcelComponent } from './private/avaliacao/tabela-avaliacao/tabela-para-excel/tabela-para-excel.component';
@@ -105,7 +107,8 @@ import { OffcanvasCriarTesteComponent } from './private/teste/criar-teste/offcan
     MatCardModule,
     MatMenuModule,
     MatProgressSpinnerModule,
-    
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: [CriarTesteComponent, CotacoesComponent, OffcanvasCriarTesteComponent],
 

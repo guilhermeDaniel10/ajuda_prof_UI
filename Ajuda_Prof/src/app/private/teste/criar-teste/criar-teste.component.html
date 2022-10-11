@@ -1,42 +1,73 @@
 <form [formGroup]="form">
+  <label class="label-nome">Nome do Teste</label>
+  <input
+    type="text"
+    class="form-control"
+    id="cotacaoInput"
+    placeholder="(Obrigatório)"
+    min="0"
+  />
+  <label class="label-data">Data do Teste</label>
+  <mat-form-field class="dataTeste" appearance="fill">
+    <mat-label>(Opcional)</mat-label>
+    <input matInput [matDatepicker]="picker" />
+    <mat-hint>DD/MM/AAAA</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <div class="mt-divider">
+    <mat-divider class="divider"></mat-divider>
+  </div>
+
   <ng-container
     formArrayName="perguntas"
     *ngFor="let pergunta of perguntas.controls; index as i"
   >
     <ng-container [formGroupName]="i">
-      <div class="form-group">
-        <label for="pergunta">Pergunta</label>
-        <input
-          type="text"
-          class="form-control"
-          id="perguntaInput"
-          aria-describedby="perguntaHelp"
-          placeholder="Ex: 1 ou 1.1"
-          formControlName="pergunta"
-          [class.invalid]="
-            incorrectPerguntaIndex.indexOf(i) > -1 && perguntaInvalida
-          "
-        />
-      </div>
+      <div class="tabela-inputs">
+        <div class="table-row">
+          <div class="table-cell">
+            <div class="input1">
+              <label for="pergunta">Pergunta</label>
+              <input
+                type="text"
+                class="form-control"
+                id="perguntaInput"
+                aria-describedby="perguntaHelp"
+                placeholder="Ex: 1 ou 1.1"
+                formControlName="pergunta"
+                [class.invalid]="
+                  incorrectPerguntaIndex.indexOf(i) > -1 && perguntaInvalida
+                "
+              />
 
-      <div *ngIf="incorrectPerguntaIndex.indexOf(i) > -1">
-        <small class="text-danger">Número da pergunta obrigatório. </small>
-      </div>
-      <div class="form-group">
-        <label class="label-cotacao" for="cotacao">Cotação Máxima</label>
-        <input
-          type="number"
-          class="form-control"
-          id="cotacaoInput"
-          placeholder="Ex: 10"
-          formControlName="cotacao"
-          [class.invalid]="
-            incorrectCotacaoIndex.indexOf(i) > -1 && cotacaoInvalida
-          "
-          min="0"
-        />
-        <div *ngIf="incorrectCotacaoIndex.indexOf(i) > -1">
-          <small class="text-danger">Cotação obrigatória. </small>
+              <div *ngIf="incorrectPerguntaIndex.indexOf(i) > -1">
+                <small class="text-danger"
+                  >Número da pergunta obrigatório.
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="table-cell cotacao-cell">
+            <div class="input2">
+              <label class="label-cotacao" for="cotacao">Cotação Máxima</label>
+              <input
+                type="number"
+                class="form-control"
+                id="cotacaoInput"
+                placeholder="Ex: 10"
+                formControlName="cotacao"
+                [class.invalid]="
+                  incorrectCotacaoIndex.indexOf(i) > -1 && cotacaoInvalida
+                "
+                min="0"
+              />
+              <div *ngIf="incorrectCotacaoIndex.indexOf(i) > -1">
+                <small class="text-danger">Cotação obrigatória. </small>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -124,9 +155,13 @@
       </div>
     </div>
     <div class="order">
-      <span >Ordenar as perguntas por ordem crescente?</span>
+      <span>Ordenar as perguntas por ordem crescente?</span>
       <label class="switch">
-        <input type="checkbox" id="company-survey-checker" (change)="checkCheckBoxvalue($event, form.value)">
+        <input
+          type="checkbox"
+          id="company-survey-checker"
+          (change)="checkCheckBoxvalue($event, form.value)"
+        />
       </label>
     </div>
   </div>
