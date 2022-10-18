@@ -17,7 +17,9 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class CriarTesteComponent implements OnInit {
   @Output() successSubmit = new EventEmitter<{ successSubmit: boolean }>();
 
+  date = new FormControl(new Date());
   perguntaInvalida: boolean = false;
+  nomeTesteInvalido: boolean = false;
   temRepitidos: boolean = false;
   cotacaoInvalida: boolean = false;
   incorrectPerguntaIndex: number[] = [];
@@ -25,7 +27,7 @@ export class CriarTesteComponent implements OnInit {
   closeResult = '';
   isChecked: boolean = false;
   perguntasAsObj: { pergunta: any; cotacao: any }[] = [];
-  
+  cotacaoTotal: number = 0;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,9 +41,13 @@ export class CriarTesteComponent implements OnInit {
     this._adapter.setLocale(this._locale);
   }
 
-  data = [{ pergunta: '', cotacao: '' }];
+  data = [
+    { pergunta: ['', Validators.required], cotacao: ['', Validators.required] },
+  ];
 
   form: FormGroup = this.formBuilder.group({
+    nomeTeste: ['', Validators.required],
+    dataTeste: new FormControl(),
     perguntas: this.formBuilder.array(
       this.data.map((pergunta) => this.formBuilder.group(pergunta))
     ),
@@ -49,6 +55,10 @@ export class CriarTesteComponent implements OnInit {
 
   get perguntas(): FormArray {
     return this.form.get('perguntas') as FormArray;
+  }
+
+  get nomeTesteValue() {
+    return this.form?.get('nomeTeste');
   }
 
   addPergunta(value: any) {
@@ -64,12 +74,16 @@ export class CriarTesteComponent implements OnInit {
 
       return;
     }
+    this.cotacaoTotal = 0;
+    this.perguntas.value.map((dados) => {
+      this.cotacaoTotal += dados.cotacao;
+    });
 
     if (this.perguntas)
       this.perguntas.push(
         this.formBuilder.group({
-          pergunta: null,
-          cotacao: null,
+          pergunta: ['', Validators.required],
+          cotacao: ['', Validators.required],
         })
       );
   }
@@ -77,6 +91,7 @@ export class CriarTesteComponent implements OnInit {
   emptyValidators() {
     this.incorrectPerguntaIndex = [];
     this.incorrectCotacaoIndex = [];
+    this.nomeTesteInvalido = false;
     this.perguntaInvalida = false;
     this.cotacaoInvalida = false;
   }
@@ -113,31 +128,38 @@ export class CriarTesteComponent implements OnInit {
   }
 
   removePergunta(index: number): void {
-    if (this.perguntas.length > 1) this.perguntas.removeAt(index);
-    else this.perguntas.patchValue([{ pergunta: null, cotacao: null }]);
+    if (this.perguntas.length > 1) {
+      this.perguntas.removeAt(index);
+      this.cotacaoTotal = 0;
+      this.perguntas.value.map((dados) => {
+        this.cotacaoTotal += dados.cotacao;
+      });
+    } else this.perguntas.patchValue([{ pergunta: '', cotacao: '' }]);
   }
 
-  submit(value: any, modal: any): void {
+  submit(value: any): void {
     this.emptyValidators();
 
-    if (this.checkValidators()) {
+    if (this.nomeTesteValue?.errors) {
+      this.nomeTesteInvalido = true;
+    }
+
+    if (this.checkValidators() || this.nomeTesteInvalido) {
       return;
     }
 
-    this.reset(modal, value);
+    this.reset(value);
     this.successSubmit.emit({ successSubmit: true });
   }
 
   hasDuplicatesForm(value: any): boolean {
     this.perguntasAsObj = [];
 
-    if(!value.perguntas){
+    if (!value.perguntas) {
       return false;
     }
     this.fillObjPerguntas(value);
     const uniqueValues = new Set(this.perguntasAsObj.map((v) => v.pergunta));
-    console.log(Number(uniqueValues.size));
-    console.log(Number(this.perguntasAsObj.length));
 
     if (Number(uniqueValues.size) < Number(this.perguntasAsObj.length)) {
       this.perguntasAsObj = [];
@@ -147,11 +169,10 @@ export class CriarTesteComponent implements OnInit {
     return false;
   }
 
-  reset(value: any, modal: any): void {
+  reset(value: any): void {
     this.form.reset();
     this.perguntas.clear();
     this.addPergunta(value);
-    modal.close('Save click');
   }
 
   open(content, value?: any) {

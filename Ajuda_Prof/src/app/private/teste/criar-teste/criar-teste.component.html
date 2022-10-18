@@ -3,18 +3,24 @@
   <input
     type="text"
     class="form-control"
+    formControlName="nomeTeste"
     id="cotacaoInput"
     placeholder="(Obrigatório)"
     min="0"
   />
+
   <label class="label-data">Data do Teste</label>
   <mat-form-field class="dataTeste" appearance="fill">
     <mat-label>(Opcional)</mat-label>
-    <input matInput [matDatepicker]="picker" />
+    <input matInput [matDatepicker]="picker" formControlName="dataTeste" />
     <mat-hint>DD/MM/AAAA</mat-hint>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
+
+  <div class="soma-cotacao">
+    <span> Cotação Total: {{ cotacaoTotal }} </span>
+  </div>
 
   <div class="mt-divider">
     <mat-divider class="divider"></mat-divider>
@@ -41,11 +47,16 @@
                   incorrectPerguntaIndex.indexOf(i) > -1 && perguntaInvalida
                 "
               />
-
+              
               <div *ngIf="incorrectPerguntaIndex.indexOf(i) > -1">
-                <small class="text-danger"
-                  >Número da pergunta obrigatório.
-                </small>
+                <div class="erros-inputs">
+                  <div>
+                    <mat-icon class="icon-error">error</mat-icon>
+                  </div>
+                  <div>
+                    <span class="mandatory"> Pergunta obrigatória. </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -64,7 +75,14 @@
                 min="0"
               />
               <div *ngIf="incorrectCotacaoIndex.indexOf(i) > -1">
-                <small class="text-danger">Cotação obrigatória. </small>
+                <div class="erros-inputs">
+                  <div>
+                    <mat-icon class="icon-error">error</mat-icon>
+                  </div>
+                  <div>
+                    <span class="mandatory"> Cotação obrigatória. </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -97,10 +115,19 @@
     <div class="erro_pergunta" *ngIf="cotacaoInvalida">Cotação inválida.</div>
   </div>-->
   <div class="botoes">
-    <button type="button" class="addPergunta" (click)="addPergunta(form.value)">
+    <button
+      type="button"
+      class="addPergunta"
+      [disabled]="perguntas.errors"
+      (click)="addPergunta(form.value)"
+    >
       Adicionar Pergunta
     </button>
-    <button class="submeter" (click)="open(content_submit, form.value)">
+    <button
+      class="submeter"
+      [disabled]="nomeTesteValue?.errors"
+      (click)="open(content_submit, form.value)"
+    >
       Submeter
     </button>
   </div>
@@ -128,7 +155,11 @@
     </p>
   </div>
   <div class="modal-footer">
-    <button type="button" class="reset-all" (click)="reset(modal, form.value)">
+    <button
+      type="button"
+      class="reset-all"
+      (click)="reset(form.value); modal.dismiss('Cross click')"
+    >
       Sim
     </button>
   </div>
@@ -170,7 +201,7 @@
     <button
       type="button"
       class="success_submit"
-      (click)="submit(form.value, modal)"
+      (click)="submit(form.value); modal.dismiss('Cross click')"
     >
       Sim
     </button>

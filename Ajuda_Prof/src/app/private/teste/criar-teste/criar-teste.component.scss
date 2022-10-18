@@ -30,6 +30,15 @@
   display: table;
 }
 
+.alerts {
+  height: 9px;
+}
+.alert {
+  margin-top: 1px;
+  font-size: small;
+  color: #5e5e5e;
+}
+
 .input1 {
   width: 90%;
 }
@@ -51,8 +60,13 @@
   display: table-cell;
 }
 
+.submeter:disabled {
+  opacity: 0.3;
+}
 
-
+.addPergunta:disabled {
+  opacity: 0.3;
+}
 
 
 .cotacao-cell {
@@ -132,8 +146,10 @@
   margin-top: 0.5em;
 }
 
-.invalid {
-  border: 1px solid red;
+.soma-cotacao {
+  color: #888888;
+  margin-top: 0.8em;
+  font-size: small;
 }
 
 .label-cotacao {
@@ -171,11 +187,26 @@
 
 .erro_pergunta {
   font-size: small;
-  color: rgb(255, 0, 0);
+  color: rgb(0, 0, 0);
 }
 
 .ng-invalid:not(form) {
   border: 2px solid red; /* red */
+}
+
+.erros-inputs {
+  margin-top: 4px;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: 20px 1fr;
+}
+.mandatory {
+  font-size: small;
+}
+
+.icon-error {
+  font-size: 24px;
 }
 
 .submeter {
