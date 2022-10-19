@@ -22,12 +22,14 @@ export class CriarTesteComponent implements OnInit {
   nomeTesteInvalido: boolean = false;
   temRepitidos: boolean = false;
   cotacaoInvalida: boolean = false;
+  cotacaoMenor0: boolean = false;
   incorrectPerguntaIndex: number[] = [];
   incorrectCotacaoIndex: number[] = [];
   closeResult = '';
   isChecked: boolean = false;
   perguntasAsObj: { pergunta: any; cotacao: any }[] = [];
   cotacaoTotal: number = 0;
+  cotacaoAtual: number = 0;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -42,7 +44,10 @@ export class CriarTesteComponent implements OnInit {
   }
 
   data = [
-    { pergunta: ['', Validators.required], cotacao: ['', Validators.required] },
+    {
+      pergunta: ['', Validators.required],
+      cotacao: ['', { validators: [Validators.required, Validators.min(0.1)] }],
+    },
   ];
 
   form: FormGroup = this.formBuilder.group({
@@ -59,6 +64,11 @@ export class CriarTesteComponent implements OnInit {
 
   get nomeTesteValue() {
     return this.form?.get('nomeTeste');
+  }
+
+  changeCotacao(value: number) {
+    this.cotacaoTotal = this.cotacaoAtual;
+    this.cotacaoTotal += value;
   }
 
   addPergunta(value: any) {
@@ -78,6 +88,7 @@ export class CriarTesteComponent implements OnInit {
     this.perguntas.value.map((dados) => {
       this.cotacaoTotal += dados.cotacao;
     });
+    this.cotacaoAtual = this.cotacaoTotal;
 
     if (this.perguntas)
       this.perguntas.push(
@@ -92,6 +103,7 @@ export class CriarTesteComponent implements OnInit {
     this.incorrectPerguntaIndex = [];
     this.incorrectCotacaoIndex = [];
     this.nomeTesteInvalido = false;
+    this.cotacaoMenor0 = false;
     this.perguntaInvalida = false;
     this.cotacaoInvalida = false;
   }
@@ -107,10 +119,15 @@ export class CriarTesteComponent implements OnInit {
       if (!perguntas[i].cotacao) {
         this.incorrectCotacaoIndex.push(i);
         this.cotacaoInvalida = true;
+      } else {
+        if (perguntas[i].cotacao < 0) {
+          this.incorrectCotacaoIndex.push(i);
+          this.cotacaoMenor0 = true;
+        }
       }
     }
 
-    return this.perguntaInvalida || this.cotacaoInvalida;
+    return this.perguntaInvalida || this.cotacaoInvalida || this.cotacaoMenor0;
   }
 
   checkCheckBoxvalue(event, value: any) {

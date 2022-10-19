@@ -73,14 +73,18 @@
                   incorrectCotacaoIndex.indexOf(i) > -1 && cotacaoInvalida
                 "
                 min="0"
+                (ngModelChange)="changeCotacao($event)"
               />
               <div *ngIf="incorrectCotacaoIndex.indexOf(i) > -1">
                 <div class="erros-inputs">
                   <div>
                     <mat-icon class="icon-error">error</mat-icon>
                   </div>
-                  <div>
+                  <div *ngIf="cotacaoInvalida">
                     <span class="mandatory"> Cotação obrigatória. </span>
+                  </div>
+                  <div *ngIf="cotacaoMenor0">
+                    <span class="mandatory"> Cotação inválida. </span>
                   </div>
                 </div>
               </div>
@@ -121,7 +125,7 @@
       [disabled]="perguntas.errors"
       (click)="addPergunta(form.value)"
     >
-      Adicionar Pergunta
+      Nova Pergunta
     </button>
     <button
       class="submeter"
