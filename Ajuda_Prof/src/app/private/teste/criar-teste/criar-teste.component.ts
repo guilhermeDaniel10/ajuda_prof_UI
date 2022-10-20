@@ -151,7 +151,10 @@ export class CriarTesteComponent implements OnInit {
       this.perguntas.value.map((dados) => {
         this.cotacaoTotal += dados.cotacao;
       });
-    } else this.perguntas.patchValue([{ pergunta: '', cotacao: '' }]);
+    } else {
+      this.cotacaoAtual = 0;
+      this.perguntas.patchValue([{ pergunta: '', cotacao: '' }]);
+    }
   }
 
   submit(value: any): void {
